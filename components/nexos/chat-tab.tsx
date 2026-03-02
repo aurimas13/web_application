@@ -23,19 +23,6 @@ const INITIAL_MESSAGES: ChatMessage[] = [
   },
 ];
 
-const AI_RESPONSES = [
-  "I've analyzed the latest metrics. Your team's productivity is up 12% this sprint. Would you like me to break down the details by team member?",
-  'Based on current pipeline data, I forecast a 23% increase in Q2 revenue. I can prepare a detailed projection report if needed.',
-  "I've cross-referenced the customer feedback with our product roadmap. There are 3 high-impact items we should prioritize. Want me to create action items?",
-  "The competitive analysis is ready. I've identified 4 key differentiators and 2 areas where we need to strengthen our position.",
-  "I've reviewed the latest sprint metrics. The engineering team completed 94% of planned story points. Shall I schedule a retrospective?",
-  'Your customer churn rate decreased by 8% this month. The retention campaigns are showing positive results across all segments.',
-];
-
-function getAIResponse(): string {
-  return AI_RESPONSES[Math.floor(Math.random() * AI_RESPONSES.length)];
-}
-
 function isAgenticCommand(message: string): boolean {
   const lower = message.toLowerCase().trim();
   return (
@@ -76,20 +63,54 @@ export default function ChatTab() {
     setIsTyping(true);
 
     const isAgentic = isAgenticCommand(trimmed);
-    const delay = isAgentic ? 800 : 1000 + Math.random() * 800;
 
-    setTimeout(() => {
-      setIsTyping(false);
-      const aiMessage: ChatMessage = {
-        id: (Date.now() + 1).toString(),
-        role: 'assistant',
-        content: isAgentic ? '' : getAIResponse(),
-        type: isAgentic ? 'agentic' : 'text',
-        timestamp: new Date(),
-      };
-      setMessages((prev) => [...prev, aiMessage]);
-    }, delay);
-  }, [input, isTyping]);
+    if (isAgentic) {
+      setTimeout(() => {
+        setIsTyping(false);
+        const aiMessage: ChatMessage = {
+          id: (Date.now() + 1).toString(),
+          role: 'assistant',
+          content: '',
+          type: 'agentic',
+          timestamp: new Date(),
+        };
+        setMessages((prev) => [...prev, aiMessage]);
+      }, 800);
+    } else {
+      const chatHistory = [...messages, userMessage]
+        .filter((m) => m.type === 'text')
+        .map((m) => ({ role: m.role, content: m.content }));
+
+      fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages: chatHistory }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          setIsTyping(false);
+          const aiMessage: ChatMessage = {
+            id: (Date.now() + 1).toString(),
+            role: 'assistant',
+            content: data.content ?? 'Sorry, something went wrong.',
+            type: 'text',
+            timestamp: new Date(),
+          };
+          setMessages((prev) => [...prev, aiMessage]);
+        })
+        .catch(() => {
+          setIsTyping(false);
+          const aiMessage: ChatMessage = {
+            id: (Date.now() + 1).toString(),
+            role: 'assistant',
+            content: 'Failed to reach the server. Please try again.',
+            type: 'text',
+            timestamp: new Date(),
+          };
+          setMessages((prev) => [...prev, aiMessage]);
+        });
+    }
+  }, [input, isTyping, messages]);
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && !e.shiftKey) {

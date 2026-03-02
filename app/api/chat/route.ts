@@ -20,7 +20,7 @@ export async function POST(req: NextRequest) {
     const lastUserMessage = [...messages].reverse().find((m) => m.role === 'user');
 
     // Log the user message to Supabase
-    if (lastUserMessage) {
+    if (lastUserMessage && supabase) {
       await supabase.from('messages').insert({
         role: lastUserMessage.role,
         content: lastUserMessage.content,
@@ -46,10 +46,12 @@ export async function POST(req: NextRequest) {
       completion.choices[0]?.message?.content ?? 'Sorry, I could not generate a response.';
 
     // Log the assistant response to Supabase
-    await supabase.from('messages').insert({
-      role: 'assistant',
-      content: assistantContent,
-    });
+    if (supabase) {
+      await supabase.from('messages').insert({
+        role: 'assistant',
+        content: assistantContent,
+      });
+    }
 
     return NextResponse.json({ content: assistantContent });
   } catch (error: any) {

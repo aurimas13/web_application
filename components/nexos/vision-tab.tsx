@@ -1,49 +1,55 @@
 'use client';
 
-import { Eye, FileText, Clock, Users } from 'lucide-react';
+import { Eye, FileText, Clock, Users, Target, Mic, Layout, BarChart3 } from 'lucide-react';
 
-const targetAudience = [
+const microInteractions = [
   {
-    role: 'C-Suite Executives',
-    desc: 'Quick access to company-wide KPIs and strategic insights',
+    title: 'Workflow Unblocking',
+    example: '"Review and approve the Q3 marketing budget agent output."',
   },
   {
-    role: 'Product Managers',
-    desc: 'Sprint analytics, roadmap tracking, and stakeholder updates',
+    title: 'On-the-go Retrieval',
+    example: '"Summarize the latest compliance risks from the legal agent."',
   },
   {
-    role: 'Sales Leaders',
-    desc: 'Pipeline visibility, deal intelligence, and forecasting',
-  },
-  {
-    role: 'Operations Teams',
-    desc: 'Workflow automation and cross-functional coordination',
+    title: 'Quick Execution',
+    example: '"Trigger the daily standup summary agent and Slack it to the team."',
   },
 ];
 
-const metrics = [
-  { metric: '40%', label: 'Reduction in app switching' },
-  { metric: '3x', label: 'Faster report generation' },
-  { metric: '60%', label: 'Less manual data entry' },
-  { metric: '85%', label: 'User adoption target' },
+const uxPrinciples = [
+  {
+    title: 'Action-Oriented Generative UI',
+    icon: Layout,
+    desc: 'Don\'t just return text. When a user requests data, generate a mini-chart. If a workflow needs approval, generate a native-feeling "Approve / Reject" card right in the chat feed.',
+  },
+  {
+    title: 'Voice-First Input',
+    icon: Mic,
+    desc: 'Mobile users are walking, driving, or holding a coffee. Voice dictation must be a primary, highly accurate input method to trigger agents effortlessly.',
+  },
+  {
+    title: 'Contextual Zero-State',
+    icon: Target,
+    desc: 'When the user opens the app, the screen shouldn\'t be blank. It should proactively suggest the right agents based on time of day or pending tasks.',
+  },
 ];
 
-const capabilities = [
+const successMetrics = [
   {
-    title: 'AI Chat Interface',
-    desc: 'Natural language interaction with enterprise data and systems',
+    metric: '>2',
+    label: 'Agent Executions per Mobile Session',
+    type: 'Primary Engagement',
   },
   {
-    title: 'Agentic Workflows',
-    desc: 'Autonomous AI agents that execute multi-step business processes',
+    metric: '<15 min',
+    label: 'Time-to-approval for agentic workflows',
+    type: 'Task Velocity',
   },
   {
-    title: 'Smart Reporting',
-    desc: 'Auto-generated insights from connected data sources',
-  },
-  {
-    title: 'Team Coordination',
-    desc: 'AI-assisted task delegation and progress tracking',
+    metric: 'D7 / D30',
+    label: 'Mobile retention — voice vs text users',
+    type: 'Retention',
   },
 ];
 
@@ -59,120 +65,152 @@ export default function VisionTab() {
             <h2 className="text-sm font-semibold text-zinc-100">
               Product Vision
             </h2>
-            <p className="text-[10px] text-zinc-400">PRD & Strategic Overview</p>
+            <p className="text-[10px] text-zinc-400">Micro-PRD &mdash; Pocket Agent</p>
           </div>
         </div>
       </div>
 
       <div className="flex-1 overflow-y-auto px-4 py-6 scrollbar-none">
         <div className="space-y-6">
+          {/* Header */}
           <div>
             <div className="flex items-center gap-2 mb-3">
               <FileText className="w-4 h-4 text-sky-400" />
               <span className="text-[10px] uppercase tracking-[0.15em] text-sky-400 font-semibold">
-                Product Requirements Document
+                Micro-PRD
               </span>
             </div>
             <h1 className="text-xl font-bold text-zinc-100 leading-tight">
-              Nexos Mobile Workspace
+              Nexos Mobile Pocket Agent
             </h1>
             <div className="flex items-center gap-4 mt-2">
               <span className="flex items-center gap-1.5 text-[10px] text-zinc-500">
                 <Clock className="w-3 h-3" />
-                Version 1.0
+                Target: Q2 2026
               </span>
               <span className="flex items-center gap-1.5 text-[10px] text-zinc-500">
                 <Users className="w-3 h-3" />
-                Enterprise Platform
+                Prototype / Vision Draft
               </span>
             </div>
+            <p className="text-[11px] text-zinc-500 mt-1.5">
+              Author: Aurimas A. Naus&#279;das
+            </p>
           </div>
 
           <div className="h-px bg-zinc-800/80" />
 
+          {/* 1. The Problem */}
           <section>
             <h2 className="text-base font-semibold text-zinc-200 mb-2">
-              Executive Summary
+              1. The Problem: The &ldquo;Desk-Bound&rdquo; Bottleneck
             </h2>
             <p className="text-sm text-zinc-400 leading-relaxed">
-              Nexos Mobile Workspace is an AI-native platform designed to
-              empower enterprise teams with intelligent automation, real-time
-              insights, and seamless collaboration from any mobile device. Our
-              vision is to transform how business professionals interact with
-              their data and tools on the go.
+              B2B leaders and decision-makers are not at their laptops 24/7, yet
+              business continues. When a critical workflow requires an approval,
+              or when a sales leader needs a quick data summary before walking
+              into a meeting, traditional SaaS mobile apps fail. They require
+              too many taps, complex navigation, and are largely just cramped
+              desktop ports.
+            </p>
+            <p className="text-sm text-zinc-400 leading-relaxed mt-2">
+              Furthermore, standard AI chatbots on mobile often return useless
+              &ldquo;walls of text&rdquo; that are impossible to digest on a
+              6-inch screen. Users need to unblock their teams and access
+              insights in seconds, not minutes.
             </p>
           </section>
 
+          {/* 2. The Solution */}
           <section>
             <h2 className="text-base font-semibold text-zinc-200 mb-2">
-              Problem Statement
+              2. The Solution: Nexos Mobile Pocket Agent
             </h2>
             <p className="text-sm text-zinc-400 leading-relaxed">
-              Enterprise teams struggle with fragmented tooling and limited
-              mobile access to critical business intelligence. Current solutions
-              require switching between multiple apps, leading to context loss
-              and decreased productivity. Nexos solves this by unifying AI
-              capabilities into a single mobile-native experience.
+              The &ldquo;Pocket Agent&rdquo; is a mobile-first extension of the
+              Nexos AI Workspace. Instead of navigating menus, users interact
+              with their pre-built, no-code nexos.ai agents via a frictionless,
+              conversational interface.
             </p>
-          </section>
-
-          <section>
-            <h2 className="text-base font-semibold text-zinc-200 mb-3">
-              Core Capabilities
-            </h2>
+            <p className="text-xs font-medium text-zinc-300 mt-3 mb-2">
+              Designed for micro-interactions:
+            </p>
             <div className="space-y-2">
-              {capabilities.map((item) => (
-                <div key={item.title} className="flex items-start gap-2.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-sky-400 mt-2 flex-shrink-0" />
-                  <div>
-                    <span className="text-sm font-medium text-zinc-200">
-                      {item.title}
-                    </span>
-                    <span className="text-sm text-zinc-400">
-                      {' '}
-                      &mdash; {item.desc}
-                    </span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          <section>
-            <h2 className="text-base font-semibold text-zinc-200 mb-3">
-              Target Audience
-            </h2>
-            <div className="grid gap-2">
-              {targetAudience.map((item) => (
+              {microInteractions.map((item) => (
                 <div
-                  key={item.role}
+                  key={item.title}
                   className="bg-zinc-900/60 border border-zinc-800/50 rounded-xl p-3"
                 >
                   <h4 className="text-xs font-medium text-zinc-200">
-                    {item.role}
+                    {item.title}
                   </h4>
-                  <p className="text-[11px] text-zinc-500 mt-0.5 leading-relaxed">
-                    {item.desc}
+                  <p className="text-[11px] text-sky-300/70 mt-1 leading-relaxed italic">
+                    {item.example}
                   </p>
                 </div>
               ))}
             </div>
           </section>
 
+          {/* 3. Key Mobile UX Principles */}
           <section>
             <h2 className="text-base font-semibold text-zinc-200 mb-3">
-              Success Metrics
+              3. Key Mobile UX Principles
             </h2>
-            <div className="grid grid-cols-2 gap-2">
-              {metrics.map((item) => (
-                <div
-                  key={item.label}
-                  className="bg-zinc-900/60 border border-zinc-800/50 rounded-xl p-3 text-center"
-                >
-                  <div className="text-lg font-bold text-sky-400">
-                    {item.metric}
+            <p className="text-sm text-zinc-400 leading-relaxed mb-3">
+              To succeed in B2B mobile, we must move past the standard
+              &ldquo;chat bubble&rdquo; UI. The Pocket Agent relies on three
+              core principles:
+            </p>
+            <div className="space-y-3">
+              {uxPrinciples.map((item) => {
+                const Icon = item.icon;
+                return (
+                  <div
+                    key={item.title}
+                    className="bg-zinc-900/60 border border-zinc-800/50 rounded-xl p-3"
+                  >
+                    <div className="flex items-center gap-2 mb-1.5">
+                      <div className="w-6 h-6 rounded-md bg-sky-500/15 flex items-center justify-center flex-shrink-0">
+                        <Icon className="w-3.5 h-3.5 text-sky-400" />
+                      </div>
+                      <h4 className="text-xs font-semibold text-zinc-200">
+                        {item.title}
+                      </h4>
+                    </div>
+                    <p className="text-[11px] text-zinc-400 leading-relaxed pl-8">
+                      {item.desc}
+                    </p>
                   </div>
-                  <p className="text-[10px] text-zinc-500 mt-0.5 leading-relaxed">
+                );
+              })}
+            </div>
+          </section>
+
+          {/* 4. Success Metrics */}
+          <section>
+            <h2 className="text-base font-semibold text-zinc-200 mb-3">
+              4. Success Metrics
+            </h2>
+            <p className="text-sm text-zinc-400 leading-relaxed mb-3">
+              We will measure the success of the Pocket Agent not just by
+              logins, but by how effectively it speeds up business operations.
+            </p>
+            <div className="space-y-2">
+              {successMetrics.map((item) => (
+                <div
+                  key={item.type}
+                  className="bg-zinc-900/60 border border-zinc-800/50 rounded-xl p-3"
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="text-[10px] uppercase tracking-wider text-zinc-500 font-medium">
+                      {item.type}
+                    </span>
+                    <span className="text-sm font-bold text-sky-400">
+                      {item.metric}
+                    </span>
+                  </div>
+                  <p className="text-[11px] text-zinc-400 mt-1 leading-relaxed">
                     {item.label}
                   </p>
                 </div>
@@ -180,6 +218,7 @@ export default function VisionTab() {
             </div>
           </section>
 
+          {/* Technical Architecture (retained from original, relevant to PRD) */}
           <section>
             <h2 className="text-base font-semibold text-zinc-200 mb-3">
               Technical Architecture
@@ -207,15 +246,6 @@ export default function VisionTab() {
               ))}
             </div>
           </section>
-
-          <div className="bg-sky-500/8 border border-sky-500/15 rounded-xl p-4">
-            <p className="text-xs text-sky-300/90 leading-relaxed">
-              This is a living document. The full PRD content will replace this
-              placeholder once provided. This tab supports rich content
-              rendering including structured sections, data tables, and visual
-              metrics.
-            </p>
-          </div>
 
           <div className="h-8" />
         </div>

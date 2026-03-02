@@ -82,6 +82,10 @@ const config: Config = {
           from: { transform: 'scale(0)', opacity: '0' },
           to: { transform: 'scale(1)', opacity: '1' },
         },
+        'slide-in': {
+          from: { opacity: '0', transform: 'translateX(16px)' },
+          to: { opacity: '1', transform: 'translateX(0)' },
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
@@ -89,6 +93,7 @@ const config: Config = {
         'message-in': 'message-in 0.3s ease-out',
         'pulse-dot': 'pulse-dot 1.4s ease-in-out infinite',
         'step-complete': 'step-complete 0.3s ease-out',
+        'slide-in': 'slide-in 0.25s ease-out',
       },
     },
   },

@@ -17,6 +17,10 @@ import {
   CheckCircle2,
   AlertCircle,
   Settings,
+  X,
+  Save,
+  Plus,
+  Trash2,
 } from 'lucide-react';
 
 interface RecentTask {
@@ -47,7 +51,7 @@ interface Agent {
   runHistory: number[];
 }
 
-const agents: Agent[] = [
+const INITIAL_AGENTS: Agent[] = [
   {
     name: 'Data Analyst',
     description:
@@ -171,6 +175,12 @@ const agents: Agent[] = [
   },
 ];
 
+const AVAILABLE_ICONS = [BarChart3, FileText, Mail, Brain, Zap, Bot];
+const MODEL_OPTIONS = ['GPT-4o', 'GPT-4o-mini', 'GPT-4-turbo', 'Claude 3.5 Sonnet'];
+const SCHEDULE_OPTIONS = ['On demand', 'Hourly', 'Daily at 9:00 AM', 'Weekly', 'Event-driven'];
+const OUTPUT_OPTIONS = ['Charts & summary', 'PDF & Slack message', 'Draft email', 'Structured brief', 'Action log & notifications'];
+const ALL_DATA_SOURCES = ['Salesforce CRM', 'BigQuery', 'HubSpot', 'Jira', 'Confluence', 'Google Sheets', 'Gmail', 'Calendar', 'Slack', 'GitHub', 'Zapier', 'Market feeds', 'Internal docs', 'Financial DB', 'CRM contacts'];
+
 function MiniBarChart({ data }: { data: number[] }) {
   const max = Math.max(...data);
   return (
@@ -198,20 +208,310 @@ function TaskStatusIcon({ status }: { status: RecentTask['status'] }) {
   return <AlertCircle className="w-3.5 h-3.5 text-red-400 flex-shrink-0" />;
 }
 
+function SelectField({
+  label,
+  value,
+  options,
+  onChange,
+}: {
+  label: string;
+  value: string;
+  options: string[];
+  onChange: (v: string) => void;
+}) {
+  return (
+    <div>
+      <label className="text-[10px] font-medium text-zinc-400 block mb-1">
+        {label}
+      </label>
+      <select
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        className="w-full bg-zinc-800/80 border border-zinc-700/40 rounded-lg px-3 py-2 text-xs text-zinc-200 outline-none focus:border-sky-500/40 transition-colors appearance-none"
+      >
+        {options.map((opt) => (
+          <option key={opt} value={opt}>
+            {opt}
+          </option>
+        ))}
+      </select>
+    </div>
+  );
+}
+
+function MultiSelectField({
+  label,
+  selected,
+  options,
+  onToggle,
+}: {
+  label: string;
+  selected: string[];
+  options: string[];
+  onToggle: (v: string) => void;
+}) {
+  return (
+    <div>
+      <label className="text-[10px] font-medium text-zinc-400 block mb-1.5">
+        {label}
+      </label>
+      <div className="flex flex-wrap gap-1.5">
+        {options.map((opt) => {
+          const isSelected = selected.includes(opt);
+          return (
+            <button
+              key={opt}
+              onClick={() => onToggle(opt)}
+              className={`px-2 py-1 rounded-md text-[10px] font-medium transition-all active:scale-95 ${
+                isSelected
+                  ? 'bg-sky-500/20 border border-sky-500/30 text-sky-300'
+                  : 'bg-zinc-800/60 border border-zinc-700/30 text-zinc-500 hover:text-zinc-300'
+              }`}
+            >
+              {opt}
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+function SettingsPanel({
+  config,
+  onSave,
+  onClose,
+}: {
+  config: AgentConfig;
+  onSave: (c: AgentConfig) => void;
+  onClose: () => void;
+}) {
+  const [model, setModel] = useState(config.model);
+  const [schedule, setSchedule] = useState(config.schedule);
+  const [sources, setSources] = useState<string[]>(config.dataSources);
+  const [output, setOutput] = useState(config.outputFormat);
+  const [saved, setSaved] = useState(false);
+
+  const handleToggleSource = (s: string) => {
+    setSources((prev) =>
+      prev.includes(s) ? prev.filter((x) => x !== s) : [...prev, s]
+    );
+  };
+
+  const handleSave = () => {
+    onSave({ model, schedule, dataSources: sources, outputFormat: output });
+    setSaved(true);
+    setTimeout(() => setSaved(false), 1500);
+  };
+
+  return (
+    <div className="flex flex-col h-full animate-slide-in">
+      <div className="px-4 py-3 border-b border-zinc-800/50 bg-zinc-950/80 backdrop-blur-sm">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <button
+              onClick={onClose}
+              className="w-8 h-8 rounded-lg bg-zinc-800/60 flex items-center justify-center hover:bg-zinc-800 transition-colors active:scale-95"
+            >
+              <X className="w-4 h-4 text-zinc-300" />
+            </button>
+            <h2 className="text-sm font-semibold text-zinc-100">
+              Agent Settings
+            </h2>
+          </div>
+          <button
+            onClick={handleSave}
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all active:scale-95 ${
+              saved
+                ? 'bg-emerald-500/20 text-emerald-400'
+                : 'bg-sky-500/20 text-sky-300 hover:bg-sky-500/30'
+            }`}
+          >
+            {saved ? (
+              <>
+                <CheckCircle2 className="w-3.5 h-3.5" /> Saved
+              </>
+            ) : (
+              <>
+                <Save className="w-3.5 h-3.5" /> Save
+              </>
+            )}
+          </button>
+        </div>
+      </div>
+
+      <div className="flex-1 overflow-y-auto px-4 py-4 space-y-4 scrollbar-none">
+        <SelectField
+          label="AI Model"
+          value={model}
+          options={MODEL_OPTIONS}
+          onChange={setModel}
+        />
+        <SelectField
+          label="Schedule"
+          value={schedule}
+          options={SCHEDULE_OPTIONS}
+          onChange={setSchedule}
+        />
+        <SelectField
+          label="Output Format"
+          value={output}
+          options={OUTPUT_OPTIONS}
+          onChange={setOutput}
+        />
+        <MultiSelectField
+          label="Data Sources"
+          selected={sources}
+          options={ALL_DATA_SOURCES}
+          onToggle={handleToggleSource}
+        />
+        <div className="h-4" />
+      </div>
+    </div>
+  );
+}
+
+function ConfigureNewAgent({ onBack, onCreate }: { onBack: () => void; onCreate: (a: Agent) => void }) {
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
+  const [model, setModel] = useState(MODEL_OPTIONS[0]);
+  const [schedule, setSchedule] = useState(SCHEDULE_OPTIONS[0]);
+  const [output, setOutput] = useState(OUTPUT_OPTIONS[0]);
+  const [sources, setSources] = useState<string[]>([]);
+  const [created, setCreated] = useState(false);
+
+  const handleToggleSource = (s: string) => {
+    setSources((prev) =>
+      prev.includes(s) ? prev.filter((x) => x !== s) : [...prev, s]
+    );
+  };
+
+  const handleCreate = () => {
+    if (!name.trim()) return;
+    const iconIdx = Math.floor(Math.random() * AVAILABLE_ICONS.length);
+    const newAgent: Agent = {
+      name: name.trim(),
+      description: description.trim() || `Custom agent: ${name.trim()}`,
+      icon: AVAILABLE_ICONS[iconIdx],
+      status: 'idle',
+      tasks: 0,
+      lastRun: 'Never',
+      successRate: 0,
+      avgDuration: '—',
+      recentTasks: [],
+      config: {
+        model,
+        schedule,
+        dataSources: sources.length ? sources : ['Manual input'],
+        outputFormat: output,
+      },
+      runHistory: [0, 0, 0, 0, 0, 0, 0],
+    };
+    onCreate(newAgent);
+    setCreated(true);
+    setTimeout(() => onBack(), 1200);
+  };
+
+  return (
+    <div className="flex flex-col h-full animate-slide-in">
+      <div className="px-4 py-3 border-b border-zinc-800/50 bg-zinc-950/80 backdrop-blur-sm">
+        <div className="flex items-center gap-3">
+          <button
+            onClick={onBack}
+            className="w-8 h-8 rounded-lg bg-zinc-800/60 flex items-center justify-center hover:bg-zinc-800 transition-colors active:scale-95"
+          >
+            <ChevronLeft className="w-4 h-4 text-zinc-300" />
+          </button>
+          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-sky-500 to-cyan-400 flex items-center justify-center">
+            <Plus className="w-4 h-4 text-white" />
+          </div>
+          <h2 className="text-sm font-semibold text-zinc-100">
+            Configure New Agent
+          </h2>
+        </div>
+      </div>
+
+      <div className="flex-1 overflow-y-auto px-4 py-4 space-y-4 scrollbar-none">
+        <div>
+          <label className="text-[10px] font-medium text-zinc-400 block mb-1">
+            Agent Name
+          </label>
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="e.g. Customer Support Bot"
+            className="w-full bg-zinc-800/80 border border-zinc-700/40 rounded-lg px-3 py-2 text-xs text-zinc-200 placeholder:text-zinc-600 outline-none focus:border-sky-500/40 transition-colors"
+          />
+        </div>
+        <div>
+          <label className="text-[10px] font-medium text-zinc-400 block mb-1">
+            Description
+          </label>
+          <textarea
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            placeholder="What should this agent do?"
+            rows={2}
+            className="w-full bg-zinc-800/80 border border-zinc-700/40 rounded-lg px-3 py-2 text-xs text-zinc-200 placeholder:text-zinc-600 outline-none focus:border-sky-500/40 transition-colors resize-none"
+          />
+        </div>
+        <SelectField label="AI Model" value={model} options={MODEL_OPTIONS} onChange={setModel} />
+        <SelectField label="Schedule" value={schedule} options={SCHEDULE_OPTIONS} onChange={setSchedule} />
+        <SelectField label="Output Format" value={output} options={OUTPUT_OPTIONS} onChange={setOutput} />
+        <MultiSelectField label="Data Sources" selected={sources} options={ALL_DATA_SOURCES} onToggle={handleToggleSource} />
+
+        <button
+          onClick={handleCreate}
+          disabled={!name.trim() || created}
+          className={`w-full py-3 rounded-xl text-xs font-semibold transition-all active:scale-[0.98] ${
+            created
+              ? 'bg-emerald-500/20 border border-emerald-500/30 text-emerald-400'
+              : name.trim()
+              ? 'bg-sky-500 text-white hover:bg-sky-400'
+              : 'bg-zinc-800/50 text-zinc-600 cursor-not-allowed'
+          }`}
+        >
+          {created ? 'Agent Created!' : 'Create Agent'}
+        </button>
+
+        <div className="h-4" />
+      </div>
+    </div>
+  );
+}
+
 function AgentDetail({
   agent,
   onBack,
+  onDelete,
+  onUpdateConfig,
 }: {
   agent: Agent;
   onBack: () => void;
+  onDelete: () => void;
+  onUpdateConfig: (c: AgentConfig) => void;
 }) {
   const [isRunning, setIsRunning] = useState(agent.status === 'active');
+  const [showSettings, setShowSettings] = useState(false);
 
   const handleToggle = useCallback(() => {
     setIsRunning((prev) => !prev);
   }, []);
 
   const Icon = agent.icon;
+
+  if (showSettings) {
+    return (
+      <SettingsPanel
+        config={agent.config}
+        onSave={(c) => {
+          onUpdateConfig(c);
+        }}
+        onClose={() => setShowSettings(false)}
+      />
+    );
+  }
 
   return (
     <div className="flex flex-col h-full animate-slide-in">
@@ -256,7 +556,10 @@ function AgentDetail({
               </>
             )}
           </button>
-          <button className="w-10 h-10 rounded-xl bg-zinc-800/60 border border-zinc-700/30 flex items-center justify-center hover:bg-zinc-800 transition-colors active:scale-95">
+          <button
+            onClick={() => setShowSettings(true)}
+            className="w-10 h-10 rounded-xl bg-zinc-800/60 border border-zinc-700/30 flex items-center justify-center hover:bg-zinc-800 transition-colors active:scale-95"
+          >
             <Settings className="w-4 h-4 text-zinc-400" />
           </button>
         </div>
@@ -303,18 +606,24 @@ function AgentDetail({
             Recent Tasks
           </h3>
           <div className="space-y-1.5">
-            {agent.recentTasks.map((task) => (
-              <div
-                key={task.id}
-                className="flex items-center gap-2.5 bg-zinc-900/40 border border-zinc-800/30 rounded-lg px-3 py-2.5"
-              >
-                <TaskStatusIcon status={task.status} />
-                <div className="flex-1 min-w-0">
-                  <p className="text-xs text-zinc-200 truncate">{task.title}</p>
-                  <p className="text-[10px] text-zinc-500">{task.time}</p>
+            {agent.recentTasks.length === 0 ? (
+              <p className="text-[11px] text-zinc-600 text-center py-4">
+                No tasks yet. Start this agent to begin.
+              </p>
+            ) : (
+              agent.recentTasks.map((task) => (
+                <div
+                  key={task.id}
+                  className="flex items-center gap-2.5 bg-zinc-900/40 border border-zinc-800/30 rounded-lg px-3 py-2.5"
+                >
+                  <TaskStatusIcon status={task.status} />
+                  <div className="flex-1 min-w-0">
+                    <p className="text-xs text-zinc-200 truncate">{task.title}</p>
+                    <p className="text-[10px] text-zinc-500">{task.time}</p>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))
+            )}
           </div>
         </section>
 
@@ -348,6 +657,14 @@ function AgentDetail({
           </div>
         </section>
 
+        {/* Delete Agent */}
+        <button
+          onClick={onDelete}
+          className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl text-xs font-medium bg-red-500/10 border border-red-500/20 text-red-400 hover:bg-red-500/15 transition-all active:scale-[0.98]"
+        >
+          <Trash2 className="w-3.5 h-3.5" /> Remove Agent
+        </button>
+
         <div className="h-4" />
       </div>
     </div>
@@ -355,13 +672,39 @@ function AgentDetail({
 }
 
 export default function AgentsTab() {
-  const [selectedAgent, setSelectedAgent] = useState<Agent | null>(null);
+  const [agents, setAgents] = useState<Agent[]>(INITIAL_AGENTS);
+  const [selectedAgentIdx, setSelectedAgentIdx] = useState<number | null>(null);
+  const [showNewAgent, setShowNewAgent] = useState(false);
 
-  if (selectedAgent) {
+  if (showNewAgent) {
+    return (
+      <ConfigureNewAgent
+        onBack={() => setShowNewAgent(false)}
+        onCreate={(newAgent) => {
+          setAgents((prev) => [...prev, newAgent]);
+          setShowNewAgent(false);
+        }}
+      />
+    );
+  }
+
+  if (selectedAgentIdx !== null && agents[selectedAgentIdx]) {
+    const agent = agents[selectedAgentIdx];
     return (
       <AgentDetail
-        agent={selectedAgent}
-        onBack={() => setSelectedAgent(null)}
+        agent={agent}
+        onBack={() => setSelectedAgentIdx(null)}
+        onDelete={() => {
+          setAgents((prev) => prev.filter((_, i) => i !== selectedAgentIdx));
+          setSelectedAgentIdx(null);
+        }}
+        onUpdateConfig={(newConfig) => {
+          setAgents((prev) =>
+            prev.map((a, i) =>
+              i === selectedAgentIdx ? { ...a, config: newConfig } : a
+            )
+          );
+        }}
       />
     );
   }
@@ -394,12 +737,12 @@ export default function AgentsTab() {
       </div>
 
       <div className="flex-1 overflow-y-auto px-4 py-4 space-y-3 scrollbar-none">
-        {agents.map((agent) => {
+        {agents.map((agent, idx) => {
           const Icon = agent.icon;
           return (
             <button
-              key={agent.name}
-              onClick={() => setSelectedAgent(agent)}
+              key={`${agent.name}-${idx}`}
+              onClick={() => setSelectedAgentIdx(idx)}
               className="w-full text-left bg-zinc-900/60 border border-zinc-800/50 rounded-xl p-4 hover:border-zinc-700/50 transition-all duration-200 active:scale-[0.98] group"
             >
               <div className="flex items-start gap-3">
@@ -447,10 +790,13 @@ export default function AgentsTab() {
         })}
 
         <div className="pt-2 pb-4">
-          <button className="w-full border border-dashed border-zinc-700/50 rounded-xl p-4 text-center hover:border-sky-500/30 hover:bg-sky-500/5 transition-all duration-200 group">
+          <button
+            onClick={() => setShowNewAgent(true)}
+            className="w-full border border-dashed border-zinc-700/50 rounded-xl p-4 text-center hover:border-sky-500/30 hover:bg-sky-500/5 transition-all duration-200 group"
+          >
             <div className="flex flex-col items-center gap-2">
               <div className="w-10 h-10 rounded-xl bg-zinc-800/50 flex items-center justify-center group-hover:bg-sky-500/10 transition-colors">
-                <Bot className="w-5 h-5 text-zinc-500 group-hover:text-sky-400 transition-colors" />
+                <Plus className="w-5 h-5 text-zinc-500 group-hover:text-sky-400 transition-colors" />
               </div>
               <span className="text-xs text-zinc-500 group-hover:text-zinc-300 transition-colors">
                 Configure New Agent

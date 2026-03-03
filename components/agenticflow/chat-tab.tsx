@@ -17,7 +17,7 @@ const INITIAL_MESSAGES: ChatMessage[] = [
     id: '1',
     role: 'assistant',
     content:
-      'Welcome to Nexos. I\'m your AI workspace assistant. I can help you analyze data, generate reports, and coordinate with your team.\n\nTry typing "Run daily report" to see an agentic workflow in action.',
+      'Welcome to AgenticFlow. I\'m your mobile-first AI workspace assistant. I can help you analyze data, generate reports, and coordinate with your team.\n\nTry typing "Run daily report" to see an agentic workflow in action.',
     type: 'text',
     timestamp: new Date(),
   },
@@ -126,7 +126,7 @@ export default function ChatTab() {
           <Sparkles className="w-4 h-4 text-white" />
         </div>
         <div>
-          <h2 className="text-sm font-semibold text-zinc-100">Nexos AI</h2>
+          <h2 className="text-sm font-semibold text-zinc-100">AgenticFlow</h2>
           <p className="text-[10px] text-emerald-400 flex items-center gap-1.5">
             <span className="relative flex h-1.5 w-1.5">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
@@ -194,7 +194,7 @@ export default function ChatTab() {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder='Message Nexos AI...'
+            placeholder='Message AgenticFlow...'
             className="flex-1 bg-transparent text-sm text-zinc-100 placeholder:text-zinc-500 outline-none"
           />
           <button

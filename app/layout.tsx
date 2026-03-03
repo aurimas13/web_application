@@ -5,8 +5,8 @@ import { Inter } from 'next/font/google';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Nexos Mobile Workspace',
-  description: 'AI-powered mobile workspace for enterprise teams',
+  title: 'AgenticFlow Mobile - B2B AI Agent Workspace',
+  description: 'Mobile-first agentic workflows for enterprise teams. Manage AI agents, approve workflows, and access insights on the go.',
   themeColor: '#09090b',
   viewport: {
     width: 'device-width',

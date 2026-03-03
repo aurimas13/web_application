@@ -65,7 +65,7 @@ export default function VisionTab() {
             <h2 className="text-sm font-semibold text-zinc-100">
               Product Vision
             </h2>
-            <p className="text-[10px] text-zinc-400">Micro-PRD &mdash; Pocket Agent</p>
+            <p className="text-[10px] text-zinc-400">Micro-PRD &mdash; Mobile Agent</p>
           </div>
         </div>
       </div>
@@ -81,7 +81,7 @@ export default function VisionTab() {
               </span>
             </div>
             <h1 className="text-xl font-bold text-zinc-100 leading-tight">
-              Nexos Mobile Pocket Agent
+              AgenticFlow Mobile Pocket Agent
             </h1>
             <div className="flex items-center gap-4 mt-2">
               <span className="flex items-center gap-1.5 text-[10px] text-zinc-500">
@@ -94,7 +94,7 @@ export default function VisionTab() {
               </span>
             </div>
             <p className="text-[11px] text-zinc-500 mt-1.5">
-              Author: Aurimas A. Naus&#279;das
+              AgenticFlow Product Team
             </p>
           </div>
 
@@ -124,12 +124,12 @@ export default function VisionTab() {
           {/* 2. The Solution */}
           <section>
             <h2 className="text-base font-semibold text-zinc-200 mb-2">
-              2. The Solution: Nexos Mobile Pocket Agent
+              2. The Solution: AgenticFlow Mobile Pocket Agent
             </h2>
             <p className="text-sm text-zinc-400 leading-relaxed">
               The &ldquo;Pocket Agent&rdquo; is a mobile-first extension of the
-              Nexos AI Workspace. Instead of navigating menus, users interact
-              with their pre-built, no-code nexos.ai agents via a frictionless,
+              AgenticFlow AI Workspace. Instead of navigating menus, users interact
+              with their pre-built, no-code agents via a frictionless,
               conversational interface.
             </p>
             <p className="text-xs font-medium text-zinc-300 mt-3 mb-2">

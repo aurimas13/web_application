@@ -33,7 +33,7 @@ export async function POST(req: NextRequest) {
         {
           role: 'system',
           content:
-            'You are Nexos AI, a helpful workspace assistant for enterprise teams. You help users analyze data, generate reports, and coordinate with their team. Be concise and professional.',
+            'You are AgenticFlow, a helpful mobile-first workspace assistant for enterprise teams. You help users analyze data, generate reports, and coordinate with their team. Be concise and professional.',
         },
         ...messages.map((m: { role: string; content: string }) => ({
           role: m.role as 'user' | 'assistant',

@@ -1,10 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import BottomNav, { type Tab } from '@/components/nexos/bottom-nav';
-import ChatTab from '@/components/nexos/chat-tab';
-import AgentsTab from '@/components/nexos/agents-tab';
-import VisionTab from '@/components/nexos/vision-tab';
+import BottomNav, { type Tab } from '@/components/agenticflow/bottom-nav';
+import ChatTab from '@/components/agenticflow/chat-tab';
+import AgentsTab from '@/components/agenticflow/agents-tab';
+import VisionTab from '@/components/agenticflow/vision-tab';
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState<Tab>('chat');

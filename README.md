@@ -85,7 +85,18 @@ Instead of text replies, the AI **renders the right interface** for each task:
 
 ---
 
-## 🛠️ Local Development
+## � Case Study
+
+| | |
+|---|---|
+| **Problem** | B2B mobile workflows rarely get AI agent treatment — sales, field ops, and service teams work on mobile but AI tools are desktop-first |
+| **Approach** | Agent-driven mobile MVP for workflow approvals, real-time reporting, and multi-agent orchestration |
+| **Role** | Concept, prototype, user flow design, full-stack implementation |
+| **What this proves** | Speed of AI product prototyping — built from zero to deployed MVP in under a week |
+
+---
+
+## �🛠️ Local Development
 
 ```bash
 git clone https://github.com/aurimas13/web_application.git

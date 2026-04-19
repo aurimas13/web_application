@@ -156,6 +156,38 @@ export default function HeroOverlay({ onEnter }: { onEnter: () => void }) {
           </div>
         </div>
 
+        {/* Case Study */}
+        <div className="bg-zinc-900/70 border border-zinc-800/60 rounded-xl px-4 py-4 space-y-3">
+          <p className="text-[10px] uppercase tracking-[0.15em] text-violet-400 font-semibold">
+            Case Study
+          </p>
+          <div className="space-y-2.5">
+            {[
+              {
+                label: 'Problem',
+                text: 'B2B mobile workflows rarely get AI agent treatment — sales, field ops, and service teams work on mobile but AI tools are desktop-first',
+              },
+              {
+                label: 'Approach',
+                text: 'Agent-driven mobile MVP for workflow approvals, real-time reporting, and multi-agent orchestration',
+              },
+              {
+                label: 'Role',
+                text: 'Concept, prototype, user flow design, full-stack implementation',
+              },
+              {
+                label: 'What this proves',
+                text: 'Speed of AI product prototyping — built from zero to deployed MVP in under a week',
+              },
+            ].map((item) => (
+              <div key={item.label}>
+                <p className="text-[10px] font-semibold text-zinc-400 mb-0.5">{item.label}</p>
+                <p className="text-xs text-zinc-300 leading-relaxed">{item.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
         {/* CTA */}
         <button
           onClick={handleEnter}

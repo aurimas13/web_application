@@ -17,7 +17,7 @@ const tabs: { id: Tab; label: string; icon: typeof MessageSquare }[] = [
 
 export default function BottomNav({ activeTab, onTabChange }: BottomNavProps) {
   return (
-    <nav className="border-t border-zinc-800/50 bg-zinc-950/95 backdrop-blur-xl">
+    <nav className="border-t border-stone-200 bg-[#FAF7F0] backdrop-blur-xl">
       <div className="flex items-center justify-around h-16 max-w-lg mx-auto">
         {tabs.map((tab) => {
           const isActive = activeTab === tab.id;
@@ -28,12 +28,12 @@ export default function BottomNav({ activeTab, onTabChange }: BottomNavProps) {
               onClick={() => onTabChange(tab.id)}
               className={`relative flex flex-col items-center gap-1 px-6 py-2 transition-all duration-200 ${
                 isActive
-                  ? 'text-sky-400'
-                  : 'text-zinc-500 active:text-zinc-300'
+                  ? 'text-teal-700'
+                  : 'text-slate-500 active:text-slate-700'
               }`}
             >
               {isActive && (
-                <span className="absolute -top-px left-1/2 -translate-x-1/2 w-8 h-0.5 bg-sky-400 rounded-full" />
+                <span className="absolute -top-px left-1/2 -translate-x-1/2 w-8 h-0.5 bg-teal-600 rounded-full" />
               )}
               <Icon className={`w-5 h-5 transition-all ${isActive ? 'stroke-[2.5]' : 'stroke-[1.5]'}`} />
               <span className="text-[10px] font-medium tracking-wide">

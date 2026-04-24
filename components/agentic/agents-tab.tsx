@@ -188,7 +188,7 @@ function MiniBarChart({ data }: { data: number[] }) {
       {data.map((val, i) => (
         <div
           key={i}
-          className="flex-1 bg-sky-500/30 rounded-sm min-w-[4px] transition-all"
+          className="flex-1 bg-teal-700 rounded-sm min-w-[4px] transition-all"
           style={{ height: `${(val / max) * 100}%` }}
         />
       ))}
@@ -198,14 +198,14 @@ function MiniBarChart({ data }: { data: number[] }) {
 
 function TaskStatusIcon({ status }: { status: RecentTask['status'] }) {
   if (status === 'completed')
-    return <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0" />;
+    return <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 flex-shrink-0" />;
   if (status === 'running')
     return (
       <div className="w-3.5 h-3.5 flex-shrink-0 flex items-center justify-center">
-        <span className="w-2 h-2 rounded-full bg-sky-400 animate-pulse" />
+        <span className="w-2 h-2 rounded-full bg-teal-600 animate-pulse" />
       </div>
     );
-  return <AlertCircle className="w-3.5 h-3.5 text-red-400 flex-shrink-0" />;
+  return <AlertCircle className="w-3.5 h-3.5 text-red-600 flex-shrink-0" />;
 }
 
 function SelectField({
@@ -221,13 +221,13 @@ function SelectField({
 }) {
   return (
     <div>
-      <label className="text-[10px] font-medium text-zinc-400 block mb-1">
+      <label className="text-[10px] font-medium text-slate-600 block mb-1">
         {label}
       </label>
       <select
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full bg-zinc-800/80 border border-zinc-700/40 rounded-lg px-3 py-2 text-xs text-zinc-200 outline-none focus:border-sky-500/40 transition-colors appearance-none"
+        className="w-full bg-stone-100 border border-stone-200 rounded-lg px-3 py-2 text-xs text-slate-800 outline-none focus:border-slate-900/15 transition-colors appearance-none"
       >
         {options.map((opt) => (
           <option key={opt} value={opt}>
@@ -252,7 +252,7 @@ function MultiSelectField({
 }) {
   return (
     <div>
-      <label className="text-[10px] font-medium text-zinc-400 block mb-1.5">
+      <label className="text-[10px] font-medium text-slate-600 block mb-1.5">
         {label}
       </label>
       <div className="flex flex-wrap gap-1.5">
@@ -264,8 +264,8 @@ function MultiSelectField({
               onClick={() => onToggle(opt)}
               className={`px-2 py-1 rounded-md text-[10px] font-medium transition-all active:scale-95 ${
                 isSelected
-                  ? 'bg-sky-500/20 border border-sky-500/30 text-sky-300'
-                  : 'bg-zinc-800/60 border border-zinc-700/30 text-zinc-500 hover:text-zinc-300'
+                  ? 'bg-teal-700 border border-teal-700 text-white shadow-sm'
+                  : 'bg-stone-100 border border-stone-200 text-slate-500 hover:text-slate-700'
               }`}
             >
               {opt}
@@ -306,16 +306,16 @@ function SettingsPanel({
 
   return (
     <div className="flex flex-col h-full animate-slide-in">
-      <div className="px-4 py-3 border-b border-zinc-800/50 bg-zinc-950/80 backdrop-blur-sm">
+      <div className="px-4 py-3 border-b border-stone-200 bg-[#FAF7F0] backdrop-blur-sm">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <button
               onClick={onClose}
-              className="w-8 h-8 rounded-lg bg-zinc-800/60 flex items-center justify-center hover:bg-zinc-800 transition-colors active:scale-95"
+              className="w-8 h-8 rounded-lg bg-stone-100 flex items-center justify-center hover:bg-stone-100 transition-colors active:scale-95"
             >
-              <X className="w-4 h-4 text-zinc-300" />
+              <X className="w-4 h-4 text-slate-700" />
             </button>
-            <h2 className="text-sm font-semibold text-zinc-100">
+            <h2 className="text-sm font-semibold text-slate-900">
               Agent Settings
             </h2>
           </div>
@@ -323,8 +323,8 @@ function SettingsPanel({
             onClick={handleSave}
             className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all active:scale-95 ${
               saved
-                ? 'bg-emerald-500/20 text-emerald-400'
-                : 'bg-sky-500/20 text-sky-300 hover:bg-sky-500/30'
+                ? 'bg-emerald-100 text-emerald-600'
+                : 'bg-slate-900 text-white hover:bg-slate-800'
             }`}
           >
             {saved ? (
@@ -414,18 +414,18 @@ function ConfigureNewAgent({ onBack, onCreate }: { onBack: () => void; onCreate:
 
   return (
     <div className="flex flex-col h-full animate-slide-in">
-      <div className="px-4 py-3 border-b border-zinc-800/50 bg-zinc-950/80 backdrop-blur-sm">
+      <div className="px-4 py-3 border-b border-stone-200 bg-[#FAF7F0] backdrop-blur-sm">
         <div className="flex items-center gap-3">
           <button
             onClick={onBack}
-            className="w-8 h-8 rounded-lg bg-zinc-800/60 flex items-center justify-center hover:bg-zinc-800 transition-colors active:scale-95"
+            className="w-8 h-8 rounded-lg bg-stone-100 flex items-center justify-center hover:bg-stone-100 transition-colors active:scale-95"
           >
-            <ChevronLeft className="w-4 h-4 text-zinc-300" />
+            <ChevronLeft className="w-4 h-4 text-slate-700" />
           </button>
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-sky-500 to-cyan-400 flex items-center justify-center">
+          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-slate-900 to-slate-700 flex items-center justify-center">
             <Plus className="w-4 h-4 text-white" />
           </div>
-          <h2 className="text-sm font-semibold text-zinc-100">
+          <h2 className="text-sm font-semibold text-slate-900">
             Configure New Agent
           </h2>
         </div>
@@ -433,7 +433,7 @@ function ConfigureNewAgent({ onBack, onCreate }: { onBack: () => void; onCreate:
 
       <div className="flex-1 overflow-y-auto px-4 py-4 space-y-4 scrollbar-none">
         <div>
-          <label className="text-[10px] font-medium text-zinc-400 block mb-1">
+          <label className="text-[10px] font-medium text-slate-600 block mb-1">
             Agent Name
           </label>
           <input
@@ -441,11 +441,11 @@ function ConfigureNewAgent({ onBack, onCreate }: { onBack: () => void; onCreate:
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="e.g. Customer Support Bot"
-            className="w-full bg-zinc-800/80 border border-zinc-700/40 rounded-lg px-3 py-2 text-xs text-zinc-200 placeholder:text-zinc-600 outline-none focus:border-sky-500/40 transition-colors"
+            className="w-full bg-stone-100 border border-stone-200 rounded-lg px-3 py-2 text-xs text-slate-800 placeholder:text-slate-400 outline-none focus:border-slate-900/15 transition-colors"
           />
         </div>
         <div>
-          <label className="text-[10px] font-medium text-zinc-400 block mb-1">
+          <label className="text-[10px] font-medium text-slate-600 block mb-1">
             Description
           </label>
           <textarea
@@ -453,7 +453,7 @@ function ConfigureNewAgent({ onBack, onCreate }: { onBack: () => void; onCreate:
             onChange={(e) => setDescription(e.target.value)}
             placeholder="What should this agent do?"
             rows={2}
-            className="w-full bg-zinc-800/80 border border-zinc-700/40 rounded-lg px-3 py-2 text-xs text-zinc-200 placeholder:text-zinc-600 outline-none focus:border-sky-500/40 transition-colors resize-none"
+            className="w-full bg-stone-100 border border-stone-200 rounded-lg px-3 py-2 text-xs text-slate-800 placeholder:text-slate-400 outline-none focus:border-slate-900/15 transition-colors resize-none"
           />
         </div>
         <SelectField label="AI Model" value={model} options={MODEL_OPTIONS} onChange={setModel} />
@@ -466,10 +466,10 @@ function ConfigureNewAgent({ onBack, onCreate }: { onBack: () => void; onCreate:
           disabled={!name.trim() || created}
           className={`w-full py-3 rounded-xl text-xs font-semibold transition-all active:scale-[0.98] ${
             created
-              ? 'bg-emerald-500/20 border border-emerald-500/30 text-emerald-400'
+              ? 'bg-emerald-100 border border-emerald-500/30 text-emerald-600'
               : name.trim()
-              ? 'bg-sky-500 text-white hover:bg-sky-400'
-              : 'bg-zinc-800/50 text-zinc-600 cursor-not-allowed'
+              ? 'bg-teal-700 text-white hover:bg-teal-600'
+              : 'bg-stone-100 text-slate-400 cursor-not-allowed'
           }`}
         >
           {created ? 'Agent Created!' : 'Create Agent'}
@@ -515,22 +515,22 @@ function AgentDetail({
 
   return (
     <div className="flex flex-col h-full animate-slide-in">
-      <div className="px-4 py-3 border-b border-zinc-800/50 bg-zinc-950/80 backdrop-blur-sm">
+      <div className="px-4 py-3 border-b border-stone-200 bg-[#FAF7F0] backdrop-blur-sm">
         <div className="flex items-center gap-3">
           <button
             onClick={onBack}
-            className="w-8 h-8 rounded-lg bg-zinc-800/60 flex items-center justify-center hover:bg-zinc-800 transition-colors active:scale-95"
+            className="w-8 h-8 rounded-lg bg-stone-100 flex items-center justify-center hover:bg-stone-100 transition-colors active:scale-95"
           >
-            <ChevronLeft className="w-4 h-4 text-zinc-300" />
+            <ChevronLeft className="w-4 h-4 text-slate-700" />
           </button>
-          <div className="w-9 h-9 rounded-xl bg-zinc-800/80 flex items-center justify-center">
-            <Icon className="w-4 h-4 text-sky-400" />
+          <div className="w-9 h-9 rounded-xl bg-stone-100 flex items-center justify-center">
+            <Icon className="w-4 h-4 text-teal-700" />
           </div>
           <div className="flex-1">
-            <h2 className="text-sm font-semibold text-zinc-100">
+            <h2 className="text-sm font-semibold text-slate-900">
               {agent.name}
             </h2>
-            <p className="text-[10px] text-zinc-400">{agent.description}</p>
+            <p className="text-[10px] text-slate-600">{agent.description}</p>
           </div>
         </div>
       </div>
@@ -542,8 +542,8 @@ function AgentDetail({
             onClick={handleToggle}
             className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl text-xs font-medium transition-all active:scale-[0.98] ${
               isRunning
-                ? 'bg-amber-500/15 border border-amber-500/25 text-amber-400'
-                : 'bg-emerald-500/15 border border-emerald-500/25 text-emerald-400'
+                ? 'bg-amber-500/15 border border-amber-500/25 text-amber-700'
+                : 'bg-emerald-100 border border-emerald-500/25 text-emerald-600'
             }`}
           >
             {isRunning ? (
@@ -558,68 +558,68 @@ function AgentDetail({
           </button>
           <button
             onClick={() => setShowSettings(true)}
-            className="w-10 h-10 rounded-xl bg-zinc-800/60 border border-zinc-700/30 flex items-center justify-center hover:bg-zinc-800 transition-colors active:scale-95"
+            className="w-10 h-10 rounded-xl bg-stone-100 border border-stone-200 flex items-center justify-center hover:bg-stone-100 transition-colors active:scale-95"
           >
-            <Settings className="w-4 h-4 text-zinc-400" />
+            <Settings className="w-4 h-4 text-slate-600" />
           </button>
         </div>
 
         {/* Stats Row */}
         <div className="grid grid-cols-3 gap-2">
-          <div className="bg-zinc-900/60 border border-zinc-800/50 rounded-xl p-3 text-center">
-            <div className="text-lg font-bold text-sky-400">{agent.tasks}</div>
-            <p className="text-[10px] text-zinc-500 mt-0.5">Total tasks</p>
+          <div className="bg-white border border-stone-200 rounded-xl p-3 text-center">
+            <div className="text-lg font-bold text-teal-700">{agent.tasks}</div>
+            <p className="text-[10px] text-slate-500 mt-0.5">Total tasks</p>
           </div>
-          <div className="bg-zinc-900/60 border border-zinc-800/50 rounded-xl p-3 text-center">
-            <div className="text-lg font-bold text-emerald-400">
+          <div className="bg-white border border-stone-200 rounded-xl p-3 text-center">
+            <div className="text-lg font-bold text-emerald-600">
               {agent.successRate}%
             </div>
-            <p className="text-[10px] text-zinc-500 mt-0.5">Success rate</p>
+            <p className="text-[10px] text-slate-500 mt-0.5">Success rate</p>
           </div>
-          <div className="bg-zinc-900/60 border border-zinc-800/50 rounded-xl p-3 text-center">
-            <div className="text-lg font-bold text-zinc-200">
+          <div className="bg-white border border-stone-200 rounded-xl p-3 text-center">
+            <div className="text-lg font-bold text-slate-800">
               {agent.avgDuration}
             </div>
-            <p className="text-[10px] text-zinc-500 mt-0.5">Avg duration</p>
+            <p className="text-[10px] text-slate-500 mt-0.5">Avg duration</p>
           </div>
         </div>
 
         {/* Run History */}
         <section>
-          <h3 className="text-xs font-semibold text-zinc-300 mb-2 flex items-center gap-1.5">
-            <Activity className="w-3.5 h-3.5 text-sky-400" />
+          <h3 className="text-xs font-semibold text-slate-700 mb-2 flex items-center gap-1.5">
+            <Activity className="w-3.5 h-3.5 text-teal-700" />
             Run History (7 days)
           </h3>
-          <div className="bg-zinc-900/60 border border-zinc-800/50 rounded-xl p-3">
+          <div className="bg-white border border-stone-200 rounded-xl p-3">
             <MiniBarChart data={agent.runHistory} />
             <div className="flex justify-between mt-1.5">
-              <span className="text-[9px] text-zinc-600">7d ago</span>
-              <span className="text-[9px] text-zinc-600">Today</span>
+              <span className="text-[9px] text-slate-400">7d ago</span>
+              <span className="text-[9px] text-slate-400">Today</span>
             </div>
           </div>
         </section>
 
         {/* Recent Tasks */}
         <section>
-          <h3 className="text-xs font-semibold text-zinc-300 mb-2 flex items-center gap-1.5">
-            <Clock className="w-3.5 h-3.5 text-sky-400" />
+          <h3 className="text-xs font-semibold text-slate-700 mb-2 flex items-center gap-1.5">
+            <Clock className="w-3.5 h-3.5 text-teal-700" />
             Recent Tasks
           </h3>
           <div className="space-y-1.5">
             {agent.recentTasks.length === 0 ? (
-              <p className="text-[11px] text-zinc-600 text-center py-4">
+              <p className="text-[11px] text-slate-400 text-center py-4">
                 No tasks yet. Start this agent to begin.
               </p>
             ) : (
               agent.recentTasks.map((task) => (
                 <div
                   key={task.id}
-                  className="flex items-center gap-2.5 bg-zinc-900/40 border border-zinc-800/30 rounded-lg px-3 py-2.5"
+                  className="flex items-center gap-2.5 bg-white border border-stone-200 rounded-lg px-3 py-2.5"
                 >
                   <TaskStatusIcon status={task.status} />
                   <div className="flex-1 min-w-0">
-                    <p className="text-xs text-zinc-200 truncate">{task.title}</p>
-                    <p className="text-[10px] text-zinc-500">{task.time}</p>
+                    <p className="text-xs text-slate-800 truncate">{task.title}</p>
+                    <p className="text-[10px] text-slate-500">{task.time}</p>
                   </div>
                 </div>
               ))
@@ -629,11 +629,11 @@ function AgentDetail({
 
         {/* Configuration */}
         <section>
-          <h3 className="text-xs font-semibold text-zinc-300 mb-2 flex items-center gap-1.5">
-            <Settings className="w-3.5 h-3.5 text-sky-400" />
+          <h3 className="text-xs font-semibold text-slate-700 mb-2 flex items-center gap-1.5">
+            <Settings className="w-3.5 h-3.5 text-teal-700" />
             Configuration
           </h3>
-          <div className="bg-zinc-900/60 border border-zinc-800/50 rounded-xl overflow-hidden">
+          <div className="bg-white border border-stone-200 rounded-xl overflow-hidden">
             {[
               { label: 'Model', value: agent.config.model },
               { label: 'Schedule', value: agent.config.schedule },
@@ -643,13 +643,13 @@ function AgentDetail({
               <div
                 key={item.label}
                 className={`flex items-center justify-between px-3 py-2.5 ${
-                  i > 0 ? 'border-t border-zinc-800/30' : ''
+                  i > 0 ? 'border-t border-stone-200' : ''
                 }`}
               >
-                <span className="text-[11px] font-medium text-zinc-400">
+                <span className="text-[11px] font-medium text-slate-600">
                   {item.label}
                 </span>
-                <span className="text-[11px] text-zinc-300 text-right max-w-[60%] truncate">
+                <span className="text-[11px] text-slate-700 text-right max-w-[60%] truncate">
                   {item.value}
                 </span>
               </div>
@@ -660,7 +660,7 @@ function AgentDetail({
         {/* Delete Agent */}
         <button
           onClick={onDelete}
-          className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl text-xs font-medium bg-red-500/10 border border-red-500/20 text-red-400 hover:bg-red-500/15 transition-all active:scale-[0.98]"
+          className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl text-xs font-medium bg-red-500/10 border border-red-500/20 text-red-600 hover:bg-red-500/15 transition-all active:scale-[0.98]"
         >
           <Trash2 className="w-3.5 h-3.5" /> Remove Agent
         </button>
@@ -711,25 +711,25 @@ export default function AgentsTab() {
 
   return (
     <div className="flex flex-col h-full">
-      <div className="px-4 py-3 border-b border-zinc-800/50 bg-zinc-950/80 backdrop-blur-sm">
+      <div className="px-4 py-3 border-b border-stone-200 bg-[#FAF7F0] backdrop-blur-sm">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-sky-500 to-cyan-400 flex items-center justify-center shadow-lg shadow-sky-500/20">
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-slate-900 to-slate-700 flex items-center justify-center shadow-lg shadow-slate-900/15">
               <Bot className="w-4 h-4 text-white" />
             </div>
             <div>
-              <h2 className="text-sm font-semibold text-zinc-100">
+              <h2 className="text-sm font-semibold text-slate-900">
                 AI Agents
               </h2>
-              <p className="text-[10px] text-zinc-400">
+              <p className="text-[10px] text-slate-600">
                 {agents.filter((a) => a.status === 'active').length} active of{' '}
                 {agents.length} configured
               </p>
             </div>
           </div>
-          <div className="flex items-center gap-1.5 bg-emerald-500/10 border border-emerald-500/20 rounded-full px-2.5 py-1">
-            <Activity className="w-3 h-3 text-emerald-400" />
-            <span className="text-[10px] font-medium text-emerald-400">
+          <div className="flex items-center gap-1.5 bg-emerald-100 border border-emerald-500/20 rounded-full px-2.5 py-1">
+            <Activity className="w-3 h-3 text-emerald-600" />
+            <span className="text-[10px] font-medium text-emerald-600">
               All Systems Normal
             </span>
           </div>
@@ -743,43 +743,43 @@ export default function AgentsTab() {
             <button
               key={`${agent.name}-${idx}`}
               onClick={() => setSelectedAgentIdx(idx)}
-              className="w-full text-left bg-zinc-900/60 border border-zinc-800/50 rounded-xl p-4 hover:border-zinc-700/50 transition-all duration-200 active:scale-[0.98] group"
+              className="w-full text-left bg-white border border-stone-200 rounded-xl p-4 hover:border-stone-200 transition-all duration-200 active:scale-[0.98] group"
             >
               <div className="flex items-start gap-3">
-                <div className="w-10 h-10 rounded-xl bg-zinc-800/80 flex items-center justify-center flex-shrink-0 group-hover:bg-zinc-800 transition-colors">
-                  <Icon className="w-5 h-5 text-sky-400" />
+                <div className="w-10 h-10 rounded-xl bg-stone-100 flex items-center justify-center flex-shrink-0 group-hover:bg-stone-100 transition-colors">
+                  <Icon className="w-5 h-5 text-teal-700" />
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center justify-between">
-                    <h3 className="text-sm font-medium text-zinc-100">
+                    <h3 className="text-sm font-medium text-slate-900">
                       {agent.name}
                     </h3>
-                    <ChevronRight className="w-4 h-4 text-zinc-600 group-hover:text-zinc-400 transition-colors" />
+                    <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-slate-600 transition-colors" />
                   </div>
-                  <p className="text-xs text-zinc-400 mt-0.5 line-clamp-2 leading-relaxed">
+                  <p className="text-xs text-slate-600 mt-0.5 line-clamp-2 leading-relaxed">
                     {agent.description}
                   </p>
                   <div className="flex items-center gap-3 mt-2.5">
                     <span
                       className={`flex items-center gap-1.5 text-[10px] font-medium ${
                         agent.status === 'active'
-                          ? 'text-emerald-400'
-                          : 'text-zinc-500'
+                          ? 'text-emerald-600'
+                          : 'text-slate-500'
                       }`}
                     >
                       <span
                         className={`w-1.5 h-1.5 rounded-full ${
                           agent.status === 'active'
-                            ? 'bg-emerald-400'
-                            : 'bg-zinc-600'
+                            ? 'bg-emerald-500'
+                            : 'bg-stone-200'
                         }`}
                       />
                       {agent.status === 'active' ? 'Active' : 'Idle'}
                     </span>
-                    <span className="text-[10px] text-zinc-500">
+                    <span className="text-[10px] text-slate-500">
                       {agent.tasks} tasks
                     </span>
-                    <span className="text-[10px] text-zinc-600">
+                    <span className="text-[10px] text-slate-400">
                       {agent.lastRun}
                     </span>
                   </div>
@@ -792,13 +792,13 @@ export default function AgentsTab() {
         <div className="pt-2 pb-4">
           <button
             onClick={() => setShowNewAgent(true)}
-            className="w-full border border-dashed border-zinc-700/50 rounded-xl p-4 text-center hover:border-sky-500/30 hover:bg-sky-500/5 transition-all duration-200 group"
+            className="w-full border border-dashed border-stone-200 rounded-xl p-4 text-center hover:border-slate-900/15 hover:bg-stone-50 transition-all duration-200 group"
           >
             <div className="flex flex-col items-center gap-2">
-              <div className="w-10 h-10 rounded-xl bg-zinc-800/50 flex items-center justify-center group-hover:bg-sky-500/10 transition-colors">
-                <Plus className="w-5 h-5 text-zinc-500 group-hover:text-sky-400 transition-colors" />
+              <div className="w-10 h-10 rounded-xl bg-stone-100 flex items-center justify-center group-hover:bg-stone-50 transition-colors">
+                <Plus className="w-5 h-5 text-slate-500 group-hover:text-teal-700 transition-colors" />
               </div>
-              <span className="text-xs text-zinc-500 group-hover:text-zinc-300 transition-colors">
+              <span className="text-xs text-slate-500 group-hover:text-slate-700 transition-colors">
                 Configure New Agent
               </span>
             </div>

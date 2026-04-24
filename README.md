@@ -1,8 +1,16 @@
 # 🚀 Agentic Mobile — B2B AI Agent Workspace
 
-**Mobile-first AI agent workspace that turns walls of text into actionable UI — approvals, charts, and live workflows on a 6-inch screen.**
+<p align="center">
+  <a href="https://agentic.aurimas.io">
+    <img src="public/linkedin-featured.svg" alt="Agentic Mobile — B2B AI Agent Workspace" width="100%" />
+  </a>
+</p>
 
-🔗 **[Live Demo → agentic.aurimas.io](https://agentic.aurimas.io)** &nbsp;|&nbsp; [← Back to aurimas.io](https://aurimas.io)
+**A mobile-first AI agent workspace that turns walls of text into actionable UI — approval cards, inline charts, and live multi-step workflows, all on a 6-inch screen.**
+
+🔗 **[Live Demo → agentic.aurimas.io](https://agentic.aurimas.io)** &nbsp;·&nbsp; [← Back to aurimas.io](https://aurimas.io) &nbsp;·&nbsp; [LinkedIn](https://www.linkedin.com/in/aurimasnausedas/)
+
+> **Available for hire** — Fractional AI Product Manager & AI Architect. I design and ship AI-native products end-to-end, from strategy to deployed prototypes. [Get in touch →](https://aurimas.io)
 
 ---
 

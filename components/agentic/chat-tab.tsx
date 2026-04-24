@@ -121,16 +121,16 @@ export default function ChatTab() {
 
   return (
     <div className="flex flex-col h-full">
-      <div className="flex items-center gap-3 px-4 py-3 border-b border-zinc-800/50 bg-zinc-950/80 backdrop-blur-sm">
-        <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-sky-500 to-cyan-400 flex items-center justify-center shadow-lg shadow-sky-500/20">
+      <div className="flex items-center gap-3 px-4 py-3 border-b border-stone-200 bg-[#FAF7F0] backdrop-blur-sm">
+        <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-slate-900 to-slate-700 flex items-center justify-center shadow-lg shadow-slate-900/15">
           <Sparkles className="w-4 h-4 text-white" />
         </div>
         <div>
-          <h2 className="text-sm font-semibold text-zinc-100">Agentic Mobile</h2>
-          <p className="text-[10px] text-emerald-400 flex items-center gap-1.5">
+          <h2 className="text-sm font-semibold text-slate-900">Agentic Mobile</h2>
+          <p className="text-[10px] text-emerald-600 flex items-center gap-1.5">
             <span className="relative flex h-1.5 w-1.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-400" />
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75" />
+              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" />
             </span>
             Online
           </p>
@@ -151,8 +151,8 @@ export default function ChatTab() {
               <div
                 className={`max-w-[85%] rounded-2xl px-4 py-3 ${
                   msg.role === 'user'
-                    ? 'bg-sky-500 text-white rounded-br-lg'
-                    : 'bg-zinc-800/80 text-zinc-200 rounded-bl-lg'
+                    ? 'bg-teal-700 text-white rounded-br-lg'
+                    : 'bg-stone-100 text-slate-800 rounded-bl-lg'
                 }`}
               >
                 <p className="text-[13px] leading-relaxed whitespace-pre-wrap">
@@ -165,18 +165,18 @@ export default function ChatTab() {
 
         {isTyping && (
           <div className="flex justify-start animate-message-in">
-            <div className="bg-zinc-800/80 rounded-2xl rounded-bl-lg px-4 py-3">
+            <div className="bg-stone-100 rounded-2xl rounded-bl-lg px-4 py-3">
               <div className="flex gap-1.5 items-center h-5">
                 <span
-                  className="w-2 h-2 rounded-full bg-zinc-400 animate-bounce"
+                  className="w-2 h-2 rounded-full bg-slate-400 animate-bounce"
                   style={{ animationDelay: '0ms', animationDuration: '0.8s' }}
                 />
                 <span
-                  className="w-2 h-2 rounded-full bg-zinc-400 animate-bounce"
+                  className="w-2 h-2 rounded-full bg-slate-400 animate-bounce"
                   style={{ animationDelay: '150ms', animationDuration: '0.8s' }}
                 />
                 <span
-                  className="w-2 h-2 rounded-full bg-zinc-400 animate-bounce"
+                  className="w-2 h-2 rounded-full bg-slate-400 animate-bounce"
                   style={{ animationDelay: '300ms', animationDuration: '0.8s' }}
                 />
               </div>
@@ -187,23 +187,23 @@ export default function ChatTab() {
         <div ref={messagesEndRef} />
       </div>
 
-      <div className="px-3 py-3 border-t border-zinc-800/50 bg-zinc-950/80 backdrop-blur-sm">
-        <div className="flex items-center gap-2 bg-zinc-800/50 border border-zinc-700/30 rounded-2xl px-4 py-2.5 focus-within:border-sky-500/40 transition-colors">
+      <div className="px-3 py-3 border-t border-stone-200 bg-[#FAF7F0] backdrop-blur-sm">
+        <div className="flex items-center gap-2 bg-stone-100 border border-stone-200 rounded-2xl px-4 py-2.5 focus-within:border-slate-900 transition-colors">
           <input
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder='Message Agentic Mobile...'
-            className="flex-1 bg-transparent text-sm text-zinc-100 placeholder:text-zinc-500 outline-none"
+            className="flex-1 bg-transparent text-sm text-slate-900 placeholder:text-slate-500 outline-none"
           />
           <button
             onClick={handleSend}
             disabled={!input.trim() || isTyping}
             className={`w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200 ${
               input.trim() && !isTyping
-                ? 'bg-sky-500 text-white hover:bg-sky-400 active:scale-95'
-                : 'bg-zinc-700/40 text-zinc-600'
+                ? 'bg-teal-700 text-white hover:bg-teal-600 active:scale-95'
+                : 'bg-stone-200 text-slate-400'
             }`}
           >
             <Send className="w-4 h-4" />

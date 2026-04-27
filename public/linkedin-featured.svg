@@ -45,18 +45,18 @@
   </g>
 
   <!-- LEFT COLUMN: text content -->
-  <g transform="translate(80 130)">
+  <g transform="translate(80 170)">
     <!-- Headline -->
-    <text font-family="Inter, system-ui, sans-serif" font-size="68" font-weight="800" fill="#0F172A" letter-spacing="-1.5">
+    <text font-family="Inter, system-ui, sans-serif" font-size="62" font-weight="800" fill="#0F172A" letter-spacing="-1.5">
       <tspan x="0" y="0">Agentic Mobile</tspan>
     </text>
-    <text font-family="Inter, system-ui, sans-serif" font-size="26" font-weight="500" fill="#334155">
-      <tspan x="0" y="44">B2B AI Agent Workspace</tspan>
-      <tspan x="0" y="78">for Decision-Makers on the Go.</tspan>
+    <text font-family="Inter, system-ui, sans-serif" font-size="24" font-weight="500" fill="#334155">
+      <tspan x="0" y="40">B2B AI Agent Workspace</tspan>
+      <tspan x="0" y="72">for Decision-Makers on the Go.</tspan>
     </text>
 
     <!-- Problem → Solution line -->
-    <g transform="translate(0 120)">
+    <g transform="translate(0 100)">
       <rect width="560" height="68" rx="12" fill="#FFFFFF" stroke="#E7E5E0"/>
       <text font-family="Inter, system-ui, sans-serif" font-size="14" fill="#475569" font-weight="500">
         <tspan x="20" y="28">Mobile AI tools return walls of text.</tspan>
@@ -65,7 +65,7 @@
     </g>
 
     <!-- Metrics row -->
-    <g transform="translate(0 215)">
+    <g transform="translate(0 195)">
       <g>
         <rect width="170" height="78" rx="12" fill="#FFFFFF" stroke="#E7E5E0"/>
         <text x="16" y="28" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="700" fill="#0D9488" letter-spacing="1.5">TASK VELOCITY</text>
@@ -84,7 +84,7 @@
     </g>
 
     <!-- Tech stack pills -->
-    <g transform="translate(0 315)" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="600">
+    <g transform="translate(0 295)" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="600">
       <g>
         <rect width="90" height="32" rx="8" fill="#FFFFFF" stroke="#E7E5E0"/>
         <text x="45" y="21" text-anchor="middle" fill="#0F172A">Next.js</text>
@@ -108,7 +108,7 @@
     </g>
 
     <!-- Hire Me pill -->
-    <g transform="translate(0 380)">
+    <g transform="translate(0 345)">
       <rect width="560" height="68" rx="14" fill="url(#dark)"/>
       <circle cx="32" cy="34" r="4" fill="#F59E0B"/>
       <text x="52" y="30" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="700" fill="#FCD34D" letter-spacing="2">AVAILABLE FOR HIRE</text>
@@ -198,7 +198,7 @@
   </g>
 
   <!-- Footer attribution -->
-  <g transform="translate(80 590)" font-family="Inter, system-ui, sans-serif">
+  <g transform="translate(80 608)" font-family="Inter, system-ui, sans-serif">
     <text font-size="13" font-weight="600" fill="#334155">
       <tspan>Built by</tspan>
       <tspan dx="6" fill="#0F172A" font-weight="800">Aurimas A. Nausėdas</tspan>

@@ -86,6 +86,18 @@ const config: Config = {
           from: { opacity: '0', transform: 'translateX(16px)' },
           to: { opacity: '1', transform: 'translateX(0)' },
         },
+        'slide-up': {
+          from: { opacity: '0', transform: 'translateY(100%)' },
+          to: { opacity: '1', transform: 'translateY(0)' },
+        },
+        'fade-in': {
+          from: { opacity: '0' },
+          to: { opacity: '1' },
+        },
+        'voice-pulse': {
+          '0%, 100%': { transform: 'scaleY(0.4)' },
+          '50%': { transform: 'scaleY(1)' },
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
@@ -94,6 +106,9 @@ const config: Config = {
         'pulse-dot': 'pulse-dot 1.4s ease-in-out infinite',
         'step-complete': 'step-complete 0.3s ease-out',
         'slide-in': 'slide-in 0.25s ease-out',
+        'slide-up': 'slide-up 0.32s cubic-bezier(0.32, 0.72, 0, 1)',
+        'fade-in': 'fade-in 0.2s ease-out',
+        'voice-pulse': 'voice-pulse 0.9s ease-in-out infinite',
       },
     },
   },

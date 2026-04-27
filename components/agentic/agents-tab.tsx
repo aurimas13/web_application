@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 import {
   Bot,
   Brain,
@@ -21,7 +21,11 @@ import {
   Save,
   Plus,
   Trash2,
+  Search,
+  Sparkles,
 } from 'lucide-react';
+import { useToast } from './toast';
+import TemplatesModal, { type AgentTemplate } from './templates-modal';
 
 interface RecentTask {
   id: string;
@@ -675,6 +679,43 @@ export default function AgentsTab() {
   const [agents, setAgents] = useState<Agent[]>(INITIAL_AGENTS);
   const [selectedAgentIdx, setSelectedAgentIdx] = useState<number | null>(null);
   const [showNewAgent, setShowNewAgent] = useState(false);
+  const [showTemplates, setShowTemplates] = useState(false);
+  const [installedTemplateIds, setInstalledTemplateIds] = useState<Set<string>>(new Set());
+  const [query, setQuery] = useState('');
+  const { push } = useToast();
+
+  const filteredAgents = useMemo(() => {
+    if (!query.trim()) return agents;
+    const q = query.toLowerCase();
+    return agents.filter(
+      (a) =>
+        a.name.toLowerCase().includes(q) || a.description.toLowerCase().includes(q)
+    );
+  }, [agents, query]);
+
+  const installTemplate = (t: AgentTemplate) => {
+    const newAgent: Agent = {
+      name: t.name,
+      description: t.description,
+      icon: t.icon,
+      status: 'active',
+      tasks: 0,
+      lastRun: 'Never',
+      successRate: 100,
+      avgDuration: '—',
+      recentTasks: [],
+      config: {
+        model: t.defaultModel,
+        schedule: t.defaultSchedule,
+        dataSources: t.defaultSources,
+        outputFormat: t.defaultOutput,
+      },
+      runHistory: [0, 0, 0, 0, 0, 0, 0],
+    };
+    setAgents((prev) => [newAgent, ...prev]);
+    setInstalledTemplateIds((prev) => new Set(prev).add(t.id));
+    push('success', `${t.name} added to your agents`);
+  };
 
   if (showNewAgent) {
     return (
@@ -683,6 +724,7 @@ export default function AgentsTab() {
         onCreate={(newAgent) => {
           setAgents((prev) => [...prev, newAgent]);
           setShowNewAgent(false);
+          push('success', `${newAgent.name} created`);
         }}
       />
     );
@@ -695,8 +737,10 @@ export default function AgentsTab() {
         agent={agent}
         onBack={() => setSelectedAgentIdx(null)}
         onDelete={() => {
+          const removed = agents[selectedAgentIdx];
           setAgents((prev) => prev.filter((_, i) => i !== selectedAgentIdx));
           setSelectedAgentIdx(null);
+          push('success', `${removed?.name ?? 'Agent'} removed`);
         }}
         onUpdateConfig={(newConfig) => {
           setAgents((prev) =>
@@ -704,44 +748,78 @@ export default function AgentsTab() {
               i === selectedAgentIdx ? { ...a, config: newConfig } : a
             )
           );
+          push('success', 'Agent settings saved');
         }}
       />
     );
   }
 
   return (
-    <div className="flex flex-col h-full">
-      <div className="px-4 py-3 border-b border-stone-200 bg-[#FAF7F0] backdrop-blur-sm">
+    <div className="flex flex-col h-full relative">
+      <div className="px-4 py-3 border-b border-stone-200 bg-[#FAF7F0] backdrop-blur-sm space-y-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-slate-900 to-slate-700 flex items-center justify-center shadow-lg shadow-slate-900/15">
               <Bot className="w-4 h-4 text-white" />
             </div>
             <div>
-              <h2 className="text-sm font-semibold text-slate-900">
-                AI Agents
-              </h2>
+              <h2 className="text-sm font-semibold text-slate-900">AI Agents</h2>
               <p className="text-[10px] text-slate-600">
                 {agents.filter((a) => a.status === 'active').length} active of{' '}
                 {agents.length} configured
               </p>
             </div>
           </div>
-          <div className="flex items-center gap-1.5 bg-emerald-100 border border-emerald-500/20 rounded-full px-2.5 py-1">
-            <Activity className="w-3 h-3 text-emerald-600" />
-            <span className="text-[10px] font-medium text-emerald-600">
-              All Systems Normal
-            </span>
+          <div className="flex items-center gap-1.5">
+            <button
+              onClick={() => setShowTemplates(true)}
+              className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-amber-50 border border-amber-200 text-amber-800 text-[11px] font-semibold hover:bg-amber-100 transition-colors active:scale-95"
+              aria-label="Browse templates"
+            >
+              <Sparkles className="w-3 h-3" />
+              Templates
+            </button>
           </div>
+        </div>
+        <div className="flex items-center gap-2 bg-white border border-stone-200 rounded-lg px-3 py-2 focus-within:border-slate-900 transition-colors">
+          <Search className="w-3.5 h-3.5 text-slate-400 flex-shrink-0" />
+          <input
+            type="text"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Search agents…"
+            className="flex-1 bg-transparent text-xs text-slate-900 placeholder:text-slate-400 outline-none"
+          />
+          {query && (
+            <button
+              onClick={() => setQuery('')}
+              className="text-slate-400 hover:text-slate-600"
+              aria-label="Clear search"
+            >
+              <X className="w-3.5 h-3.5" />
+            </button>
+          )}
         </div>
       </div>
 
       <div className="flex-1 overflow-y-auto px-4 py-4 space-y-3 scrollbar-none">
-        {agents.map((agent, idx) => {
+        {filteredAgents.length === 0 && query && (
+          <div className="text-center py-8">
+            <p className="text-xs text-slate-500">No agents match &ldquo;{query}&rdquo;</p>
+            <button
+              onClick={() => setShowTemplates(true)}
+              className="mt-3 inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-slate-900 text-white text-[11px] font-semibold"
+            >
+              <Sparkles className="w-3 h-3" /> Browse templates
+            </button>
+          </div>
+        )}
+        {filteredAgents.map((agent) => {
+          const idx = agents.indexOf(agent);
           const Icon = agent.icon;
           return (
             <button
-              key={`${agent.name}-${idx}`}
+              key={`${agent.name}-${idx}-${agent.tasks}`}
               onClick={() => setSelectedAgentIdx(idx)}
               className="w-full text-left bg-white border border-stone-200 rounded-xl p-4 hover:border-stone-200 transition-all duration-200 active:scale-[0.98] group"
             >
@@ -789,22 +867,42 @@ export default function AgentsTab() {
           );
         })}
 
-        <div className="pt-2 pb-4">
+        <div className="pt-2 pb-4 grid grid-cols-2 gap-2">
           <button
             onClick={() => setShowNewAgent(true)}
-            className="w-full border border-dashed border-stone-200 rounded-xl p-4 text-center hover:border-slate-900/15 hover:bg-stone-50 transition-all duration-200 group"
+            className="border border-dashed border-stone-200 rounded-xl p-4 text-center hover:border-slate-900/30 hover:bg-stone-50 transition-all duration-200 group"
           >
             <div className="flex flex-col items-center gap-2">
-              <div className="w-10 h-10 rounded-xl bg-stone-100 flex items-center justify-center group-hover:bg-stone-50 transition-colors">
-                <Plus className="w-5 h-5 text-slate-500 group-hover:text-teal-700 transition-colors" />
+              <div className="w-9 h-9 rounded-xl bg-stone-100 flex items-center justify-center group-hover:bg-white transition-colors">
+                <Plus className="w-4 h-4 text-slate-500 group-hover:text-teal-700 transition-colors" />
               </div>
-              <span className="text-xs text-slate-500 group-hover:text-slate-700 transition-colors">
-                Configure New Agent
+              <span className="text-[11px] text-slate-600 group-hover:text-slate-900 transition-colors font-medium">
+                New Agent
+              </span>
+            </div>
+          </button>
+          <button
+            onClick={() => setShowTemplates(true)}
+            className="border border-dashed border-amber-200 rounded-xl p-4 text-center hover:border-amber-400 hover:bg-amber-50/50 transition-all duration-200 group"
+          >
+            <div className="flex flex-col items-center gap-2">
+              <div className="w-9 h-9 rounded-xl bg-amber-50 flex items-center justify-center group-hover:bg-amber-100 transition-colors">
+                <Sparkles className="w-4 h-4 text-amber-700" />
+              </div>
+              <span className="text-[11px] text-slate-600 group-hover:text-slate-900 transition-colors font-medium">
+                From Template
               </span>
             </div>
           </button>
         </div>
       </div>
+
+      <TemplatesModal
+        open={showTemplates}
+        onClose={() => setShowTemplates(false)}
+        onInstall={installTemplate}
+        installedIds={installedTemplateIds}
+      />
     </div>
   );
 }

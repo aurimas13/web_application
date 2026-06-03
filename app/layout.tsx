@@ -1,6 +1,7 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import ServiceWorkerRegister from '@/components/agentic/sw-register';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -59,8 +60,20 @@ export const metadata: Metadata = {
     images: [OG_IMAGE],
   },
   icons: {
-    icon: '/icon.svg',
-    apple: '/apple-touch-icon.png',
+    icon: [
+      { url: '/icon.svg', type: 'image/svg+xml' },
+      { url: '/icon-192.png', type: 'image/png', sizes: '192x192' },
+      { url: '/icon-512.png', type: 'image/png', sizes: '512x512' },
+    ],
+    apple: [{ url: '/apple-touch-icon.png', sizes: '180x180' }],
+  },
+  appleWebApp: {
+    capable: true,
+    title: 'Agentic Mobile',
+    statusBarStyle: 'default',
+  },
+  formatDetection: {
+    telephone: false,
   },
 };
 
@@ -73,6 +86,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.className} h-full`}>
         {children}
+        <ServiceWorkerRegister />
       </body>
     </html>
   );

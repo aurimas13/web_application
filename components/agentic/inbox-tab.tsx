@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Inbox, CheckCircle2, X, Clock, DollarSign } from 'lucide-react';
+import { Inbox, CheckCircle2, X, Clock, DollarSign, ChevronDown } from 'lucide-react';
 import type { Decision, InboxItem } from './types';
 
 export default function InboxTab({
@@ -12,6 +12,7 @@ export default function InboxTab({
   onResolve: (id: string, decision: Decision) => void;
 }) {
   const [filter, setFilter] = useState<'pending' | 'all' | 'resolved'>('pending');
+  const [expandedId, setExpandedId] = useState<string | null>(null);
 
   const pendingCount = items.filter((i) => i.status === 'pending').length;
   const filtered = items.filter((i) =>
@@ -84,45 +85,85 @@ export default function InboxTab({
             </p>
           </div>
         ) : (
-          filtered.map((item) => (
+          filtered.map((item) => {
+            const isExpanded = expandedId === item.id;
+            const hasDetails = (item.context && item.context.length > 0) || !!item.rationale;
+            return (
             <div
               key={item.id}
-              className={`bg-white border rounded-xl p-4 transition-all ${
+              className={`bg-white border rounded-xl transition-all overflow-hidden ${
                 item.priority === 'high' && item.status === 'pending'
                   ? 'border-amber-300/70 shadow-sm shadow-amber-200/40'
                   : 'border-stone-200'
               }`}
             >
-              <div className="flex items-start justify-between gap-3 mb-2">
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-1.5 mb-1 flex-wrap">
-                    <span className="text-[10px] uppercase tracking-wider text-slate-500 font-semibold">
-                      {item.agent}
-                    </span>
-                    {item.priority === 'high' && item.status === 'pending' && (
-                      <span className="px-1.5 py-0.5 rounded text-[9px] font-bold uppercase bg-amber-100 text-amber-800 leading-none">
-                        High
+              <button
+                onClick={() => hasDetails && setExpandedId(isExpanded ? null : item.id)}
+                className={`w-full text-left p-4 ${hasDetails ? 'hover:bg-stone-50 active:bg-stone-100 transition-colors' : 'cursor-default'}`}
+              >
+                <div className="flex items-start justify-between gap-3 mb-2">
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-1.5 mb-1 flex-wrap">
+                      <span className="text-[10px] uppercase tracking-wider text-slate-500 font-semibold">
+                        {item.agent}
                       </span>
+                      {item.priority === 'high' && item.status === 'pending' && (
+                        <span className="px-1.5 py-0.5 rounded text-[9px] font-bold uppercase bg-amber-100 text-amber-800 leading-none">
+                          High
+                        </span>
+                      )}
+                    </div>
+                    <h3 className="text-sm font-semibold text-slate-900 leading-snug">
+                      {item.title}
+                    </h3>
+                  </div>
+                  <span className="text-[10px] text-slate-400 flex items-center gap-1 flex-shrink-0">
+                    <Clock className="w-3 h-3" /> {item.receivedAt}
+                  </span>
+                </div>
+
+                <p className="text-xs text-slate-600 leading-relaxed">{item.summary}</p>
+
+                <div className="flex items-center gap-2 mt-2 flex-wrap">
+                  {item.amount && (
+                    <div className="inline-flex items-center gap-1.5 px-2 py-1 rounded-md bg-stone-100 text-[11px] font-medium text-slate-700">
+                      <DollarSign className="w-3 h-3" /> {item.amount}
+                    </div>
+                  )}
+                  {hasDetails && (
+                    <span className="ml-auto inline-flex items-center gap-1 text-[10px] text-slate-500 font-medium">
+                      {isExpanded ? 'Hide details' : 'View details'}
+                      <ChevronDown
+                        className={`w-3 h-3 transition-transform ${isExpanded ? 'rotate-180' : ''}`}
+                      />
+                    </span>
+                  )}
+                </div>
+              </button>
+
+              {isExpanded && hasDetails && (
+                <div className="px-4 pb-3 -mt-1 animate-fade-in">
+                  <div className="bg-stone-50 rounded-lg p-2.5 space-y-2 border border-stone-200">
+                    {item.context && item.context.length > 0 && (
+                      <ul className="space-y-1">
+                        {item.context.map((c, i) => (
+                          <li key={i} className="text-[11px] text-slate-700 flex items-start gap-1.5">
+                            <span className="mt-1.5 w-1 h-1 rounded-full bg-teal-600 flex-shrink-0" />
+                            <span className="leading-relaxed">{c}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                    {item.rationale && (
+                      <p className="text-[11px] italic text-slate-600 leading-relaxed border-l-2 border-teal-300 pl-2">
+                        {item.rationale}
+                      </p>
                     )}
                   </div>
-                  <h3 className="text-sm font-semibold text-slate-900 leading-snug">
-                    {item.title}
-                  </h3>
-                </div>
-                <span className="text-[10px] text-slate-400 flex items-center gap-1 flex-shrink-0">
-                  <Clock className="w-3 h-3" /> {item.receivedAt}
-                </span>
-              </div>
-
-              <p className="text-xs text-slate-600 leading-relaxed">{item.summary}</p>
-
-              {item.amount && (
-                <div className="mt-2 inline-flex items-center gap-1.5 px-2 py-1 rounded-md bg-stone-100 text-[11px] font-medium text-slate-700">
-                  <DollarSign className="w-3 h-3" /> {item.amount}
                 </div>
               )}
 
-              <div className="mt-3">
+              <div className="px-4 pb-4">
                 {item.status === 'pending' ? (
                   <div className="grid grid-cols-2 gap-2">
                     <button
@@ -156,7 +197,8 @@ export default function InboxTab({
                 )}
               </div>
             </div>
-          ))
+            );
+          })
         )}
       </div>
     </div>

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback, useMemo } from 'react';
+import { useState, useCallback, useMemo, useEffect } from 'react';
 import {
   Bot,
   Brain,
@@ -690,6 +690,40 @@ function AgentDetail({
   );
 }
 
+// Map icon -> stable string key so we can rehydrate icons from localStorage.
+const ICON_REGISTRY: Record<string, typeof BarChart3> = {
+  TrendingUp,
+  AlertCircle,
+  Receipt,
+  Target,
+  Megaphone,
+  Bot,
+  Brain,
+  BarChart3,
+  FileText,
+  Mail,
+  Zap,
+};
+const iconToKey = (icon: typeof BarChart3) => {
+  for (const [key, val] of Object.entries(ICON_REGISTRY)) if (val === icon) return key;
+  return 'Bot';
+};
+const keyToIcon = (key: string) => ICON_REGISTRY[key] ?? Bot;
+
+const STORAGE_KEY = 'agentic-mobile-agents-v1';
+const TEMPLATES_KEY = 'agentic-mobile-installed-templates-v1';
+
+interface SerializedAgent extends Omit<Agent, 'icon'> {
+  iconKey: string;
+}
+
+function serializeAgents(agents: Agent[]): SerializedAgent[] {
+  return agents.map(({ icon, ...rest }) => ({ ...rest, iconKey: iconToKey(icon) }));
+}
+function deserializeAgents(raw: SerializedAgent[]): Agent[] {
+  return raw.map(({ iconKey, ...rest }) => ({ ...rest, icon: keyToIcon(iconKey) }));
+}
+
 export default function AgentsTab() {
   const [agents, setAgents] = useState<Agent[]>(INITIAL_AGENTS);
   const [selectedAgentIdx, setSelectedAgentIdx] = useState<number | null>(null);
@@ -697,7 +731,46 @@ export default function AgentsTab() {
   const [showTemplates, setShowTemplates] = useState(false);
   const [installedTemplateIds, setInstalledTemplateIds] = useState<Set<string>>(new Set());
   const [query, setQuery] = useState('');
+  const [hydrated, setHydrated] = useState(false);
   const { push } = useToast();
+
+  // Hydrate from localStorage on mount.
+  useEffect(() => {
+    try {
+      const rawAgents = localStorage.getItem(STORAGE_KEY);
+      if (rawAgents) {
+        const parsed = JSON.parse(rawAgents) as SerializedAgent[];
+        if (Array.isArray(parsed) && parsed.length > 0) setAgents(deserializeAgents(parsed));
+      }
+      const rawTemplates = localStorage.getItem(TEMPLATES_KEY);
+      if (rawTemplates) {
+        const ids = JSON.parse(rawTemplates) as string[];
+        if (Array.isArray(ids)) setInstalledTemplateIds(new Set(ids));
+      }
+    } catch {
+      /* ignore corrupt storage */
+    }
+    setHydrated(true);
+  }, []);
+
+  // Persist agents whenever they change (after hydration).
+  useEffect(() => {
+    if (!hydrated) return;
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(serializeAgents(agents)));
+    } catch {
+      /* quota / private mode */
+    }
+  }, [agents, hydrated]);
+
+  useEffect(() => {
+    if (!hydrated) return;
+    try {
+      localStorage.setItem(TEMPLATES_KEY, JSON.stringify(Array.from(installedTemplateIds)));
+    } catch {
+      /* ignore */
+    }
+  }, [installedTemplateIds, hydrated]);
 
   const filteredAgents = useMemo(() => {
     if (!query.trim()) return agents;

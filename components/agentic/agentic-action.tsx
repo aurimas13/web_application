@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import { Check, Loader as Loader2, Circle, Zap, MessageSquare, FileText, ArrowRight } from 'lucide-react';
-import { useToast } from './toast';
+import StandupReport from './standup-report';
+import SlackComposer from './slack-composer';
 
 const WORKFLOW_STEPS = [
   { label: 'Connecting to Salesforce + Gong', duration: 1100 },
@@ -14,7 +15,8 @@ const WORKFLOW_STEPS = [
 export default function AgenticAction() {
   const [currentStep, setCurrentStep] = useState(0);
   const [isComplete, setIsComplete] = useState(false);
-  const { push } = useToast();
+  const [reportOpen, setReportOpen] = useState(false);
+  const [slackOpen, setSlackOpen] = useState(false);
 
   useEffect(() => {
     if (isComplete) return;
@@ -31,6 +33,7 @@ export default function AgenticAction() {
   }, [currentStep, isComplete]);
 
   return (
+    <>
     <div className="bg-white border border-stone-200 rounded-2xl rounded-bl-lg p-4 max-w-[300px]">
       <div className="flex items-center gap-2 mb-4">
         <div className="w-6 h-6 rounded-md bg-teal-50 flex items-center justify-center">
@@ -111,13 +114,13 @@ export default function AgenticAction() {
 
           <div className="grid grid-cols-2 gap-2">
             <button
-              onClick={() => push('success', 'Standup posted to #sales-leadership')}
+              onClick={() => setSlackOpen(true)}
               className="flex items-center justify-center gap-1.5 py-2 rounded-lg bg-stone-100 hover:bg-stone-200 text-slate-700 text-xs font-semibold transition-colors active:scale-95"
             >
               <MessageSquare className="w-3.5 h-3.5" /> Slack
             </button>
             <button
-              onClick={() => push('info', 'Opening full report…')}
+              onClick={() => setReportOpen(true)}
               className="flex items-center justify-center gap-1.5 py-2 rounded-lg bg-slate-900 text-white hover:bg-slate-800 text-xs font-semibold transition-colors active:scale-95"
             >
               <FileText className="w-3.5 h-3.5" /> Open <ArrowRight className="w-3 h-3" />
@@ -126,5 +129,13 @@ export default function AgenticAction() {
         </div>
       )}
     </div>
+
+    <StandupReport
+      open={reportOpen}
+      onClose={() => setReportOpen(false)}
+      onPostToSlack={() => setSlackOpen(true)}
+    />
+    <SlackComposer open={slackOpen} onClose={() => setSlackOpen(false)} />
+    </>
   );
 }

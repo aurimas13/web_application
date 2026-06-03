@@ -62,7 +62,7 @@
     <rect width="490" height="78" rx="16" fill="url(#dark)"/>
     <circle cx="32" cy="39" r="5" fill="#F59E0B"/>
     <text x="52" y="34" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="700" fill="#FCD34D" letter-spacing="2">AVAILABLE FOR HIRE</text>
-    <text x="52" y="58" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="700" fill="#FFFFFF">Fractional AI PM &amp; AI Architect</text>
+    <text x="52" y="58" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="700" fill="#FFFFFF">Fractional AI Engineer · AI PM · AI Architect</text>
   </g>
 
   <!-- LEFT: CTA -->

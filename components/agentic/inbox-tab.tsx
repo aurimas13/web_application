@@ -59,12 +59,28 @@ export default function InboxTab({
       <div className="flex-1 overflow-y-auto px-4 py-4 space-y-2.5 scrollbar-none">
         {filtered.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-full text-center px-6">
-            <div className="w-14 h-14 rounded-2xl bg-emerald-100 flex items-center justify-center mb-3">
-              <CheckCircle2 className="w-7 h-7 text-emerald-600" />
+            <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-3 ${
+              filter === 'pending' ? 'bg-emerald-100' : 'bg-stone-100'
+            }`}>
+              {filter === 'pending' ? (
+                <CheckCircle2 className="w-7 h-7 text-emerald-600" />
+              ) : (
+                <Inbox className="w-7 h-7 text-slate-400" />
+              )}
             </div>
-            <h3 className="text-sm font-semibold text-slate-900">All caught up</h3>
+            <h3 className="text-sm font-semibold text-slate-900">
+              {filter === 'pending'
+                ? 'All caught up'
+                : filter === 'resolved'
+                ? 'Nothing resolved yet'
+                : 'Inbox is empty'}
+            </h3>
             <p className="text-[11px] text-slate-500 mt-1 leading-relaxed max-w-[240px]">
-              No pending approvals. Your agents are running smoothly in the background.
+              {filter === 'pending'
+                ? 'No pending approvals. Your agents are running smoothly in the background.'
+                : filter === 'resolved'
+                ? 'Items you approve or reject will show up here.'
+                : 'New decisions from your agents will land here.'}
             </p>
           </div>
         ) : (

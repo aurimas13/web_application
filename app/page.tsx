@@ -7,8 +7,8 @@ import {
   ExternalLink,
   Sparkles,
   Zap,
-  Bot,
-  BarChart3,
+  Target,
+  TrendingUp,
 } from 'lucide-react';
 import BottomNav, { type Tab } from '@/components/agentic/bottom-nav';
 import ChatTab from '@/components/agentic/chat-tab';
@@ -23,54 +23,55 @@ import type { Decision, InboxItem } from '@/components/agentic/types';
 const SEED_INBOX: InboxItem[] = [
   {
     id: 'seed-1',
-    agent: 'Pipeline Standup',
-    title: 'Approve Q3 marketing budget — $284,000',
+    agent: 'Quote Approver',
+    title: 'Acme Corp renewal — 18% discount (off-policy)',
     summary:
-      '12% over Q2 actual spend, but within annual envelope. CFO pre-reviewed Apr 22. ROI projection 3.4x.',
-    amount: '$284,000',
+      '3-year renewal at $312k ARR with 18% discount. Standard policy caps at 15%. Win-rate at this tier historically 78%.',
+    amount: '$312,000 ARR',
     priority: 'high',
     receivedAt: '8 min ago',
     status: 'pending',
   },
   {
     id: 'seed-2',
-    agent: 'Compliance Agent',
-    title: 'Datadog vendor renewal',
+    agent: 'Deal Risk Analyzer',
+    title: 'Globex ($240k) — champion left company',
     summary:
-      'Annual renewal at $48,200. Terms unchanged. Auto-renews in 6 days unless rejected.',
-    amount: '$48,200 / yr',
-    priority: 'medium',
+      'Primary champion left Globex 4 days ago. No replacement contact identified. Deal in stage 4, close date in 18 days.',
+    priority: 'high',
     receivedAt: '32 min ago',
     status: 'pending',
   },
   {
     id: 'seed-3',
-    agent: 'Deal Risk Analyzer',
-    title: 'Stalled deal — Acme Corp ($120k)',
+    agent: 'Renewal Watcher',
+    title: 'Initech renewal at risk — 47 days out',
     summary:
-      'No prospect activity for 14 days. Recommend exec outreach this week to prevent slip.',
+      'Usage down 31% over the last 60 days. CSM open ticket > 5 days. NPS dropped from 8.4 to 6.1. Recommend exec sponsor outreach.',
+    amount: '$185,000 / yr',
     priority: 'high',
     receivedAt: '1 hr ago',
     status: 'pending',
   },
   {
     id: 'seed-4',
-    agent: 'Inbox Triage',
-    title: 'Draft reply ready — Series B intro',
+    agent: 'Quote Approver',
+    title: 'Wonka Industries multi-year — within policy',
     summary:
-      'Drafted a warm intro reply to the Sequoia partner. Send as-is or edit before sending.',
+      '2-year deal at $127k TCV. Discount 11% (within 15% policy). Auto-approves in 4 hrs unless rejected.',
+    amount: '$127,000 TCV',
     priority: 'medium',
     receivedAt: '2 hrs ago',
     status: 'pending',
   },
   {
     id: 'seed-5',
-    agent: 'Customer Success Pulse',
-    title: 'Health score drop — Globex Inc.',
+    agent: 'Outbound Sequencer',
+    title: 'Drafted: Series B fintech CFO touch — 24 reps',
     summary:
-      'NPS dropped from 8.4 to 6.1 over 30 days. Two open tickets unresolved >5 days.',
+      'Personalized outbound drafts ready for review. Targeting CFOs at Series B fintechs with > $20M ARR.',
     priority: 'medium',
-    receivedAt: 'Yesterday',
+    receivedAt: '3 hrs ago',
     status: 'approved',
   },
 ];
@@ -80,24 +81,22 @@ function AppShell({
   onResolve,
   settingsOpen,
   setSettingsOpen,
+  onOpenHero,
 }: {
   inbox: InboxItem[];
   onResolve: (id: string, decision: Decision) => void;
   settingsOpen: boolean;
   setSettingsOpen: (v: boolean) => void;
+  onOpenHero: () => void;
 }) {
   const [activeTab, setActiveTab] = useState<Tab>('chat');
-  const [showHero, setShowHero] = useState(true);
   const { push } = useToast();
 
   const pendingCount = inbox.filter((i) => i.status === 'pending').length;
 
   const handleChatApproval = useCallback(
     (item: InboxItem, decision: Decision) => {
-      // Add to inbox state as a resolved item so it appears in "resolved" filter
-      onResolve(item.id, decision); // no-op for items already in inbox
-      // For chat-spawned approvals not in inbox, push a copy directly
-      // (parent will dedupe via id)
+      onResolve(item.id, decision);
       push(
         decision === 'approved' ? 'success' : 'info',
         decision === 'approved' ? 'Approved & notified team' : 'Rejected — agent informed'
@@ -124,8 +123,11 @@ function AppShell({
         onTabChange={setActiveTab}
         inboxBadge={pendingCount}
       />
-      {showHero && <HeroOverlay onEnter={() => setShowHero(false)} />}
-      <SettingsSheet open={settingsOpen} onClose={() => setSettingsOpen(false)} />
+      <SettingsSheet
+        open={settingsOpen}
+        onClose={() => setSettingsOpen(false)}
+        onViewCaseStudy={onOpenHero}
+      />
     </div>
   );
 }
@@ -133,6 +135,7 @@ function AppShell({
 export default function Home() {
   const [inbox, setInbox] = useState<InboxItem[]>(SEED_INBOX);
   const [settingsOpen, setSettingsOpen] = useState(false);
+  const [showHero, setShowHero] = useState(true);
 
   const handleResolve = useCallback((id: string, decision: Decision) => {
     setInbox((prev) =>
@@ -145,13 +148,15 @@ export default function Home() {
   return (
     <ToastProvider>
       {/* Mobile & tablet: full-screen app */}
-      <div className="h-[100dvh] w-full max-w-lg mx-auto lg:hidden">
+      <div className="h-[100dvh] w-full max-w-lg mx-auto lg:hidden relative overflow-hidden bg-[#FAF7F0]">
         <AppShell
           inbox={inbox}
           onResolve={handleResolve}
           settingsOpen={settingsOpen}
           setSettingsOpen={setSettingsOpen}
+          onOpenHero={() => setShowHero(true)}
         />
+        {showHero && <HeroOverlay onEnter={() => setShowHero(false)} />}
       </div>
 
       {/* Desktop: showcase frame with phone mockup + side context */}
@@ -161,25 +166,24 @@ export default function Home() {
           <aside className="col-span-4 space-y-6">
             <div>
               <p className="text-[11px] uppercase tracking-[0.2em] text-teal-700 font-semibold mb-2">
-                B2B AI · Product Case Study
+                Sales-Ops AI · Product Case Study
               </p>
               <h1 className="text-4xl font-bold text-slate-900 leading-[1.1] tracking-tight">
                 Agentic Mobile
               </h1>
               <p className="text-lg text-slate-700 mt-2 leading-snug">
-                A mobile-first AI agent workspace for decision-makers on the go.
+                AI Sales-Ops workspace for CROs, VP Sales, and RevOps leaders on the go.
               </p>
             </div>
             <p className="text-sm text-slate-600 leading-relaxed">
-              Built to prove that B2B mobile users don&apos;t need walls of text — they need
-              <span className="text-slate-900 font-medium"> action-oriented generative UI</span> that
-              renders approval cards, charts, and live workflows directly in a conversational feed.
+              Sales leaders run revenue from their phones — but Salesforce, Outreach, and Gong are desktop-first. Approvals stall, deals slip. This prototype proves
+              <span className="text-slate-900 font-medium"> action-oriented generative UI</span> wins on mobile: the AI renders approval cards, pipeline standups, and forecast tiles right inside the chat feed. Every decision is one tap.
             </p>
             <div className="grid grid-cols-3 gap-2">
               {[
-                { v: '< 15 min', l: 'Time-to-approval', Icon: Zap },
-                { v: '2+/session', l: 'Agent runs', Icon: Bot },
-                { v: '40%+', l: 'Zero-state engage', Icon: BarChart3 },
+                { v: '< 15 min', l: 'Quote approval', Icon: Zap },
+                { v: '5 native', l: 'Sales agents', Icon: TrendingUp },
+                { v: '+8% pts', l: 'Forecast accuracy', Icon: Target },
               ].map((m) => (
                 <div
                   key={m.l}
@@ -206,11 +210,11 @@ export default function Home() {
                 What&apos;s real, not staged
               </p>
               <ul className="space-y-1.5 text-xs text-slate-700">
-                <li className="flex gap-2"><span className="text-emerald-600">✓</span>Streaming GPT-4o-mini chat</li>
+                <li className="flex gap-2"><span className="text-emerald-600">✓</span>Streaming GPT-4o-mini chat with sales-tuned prompt</li>
                 <li className="flex gap-2"><span className="text-emerald-600">✓</span>Voice input (Web Speech API)</li>
-                <li className="flex gap-2"><span className="text-emerald-600">✓</span>In-chat approval cards</li>
-                <li className="flex gap-2"><span className="text-emerald-600">✓</span>Agent templates marketplace</li>
-                <li className="flex gap-2"><span className="text-emerald-600">✓</span>Live integrations panel</li>
+                <li className="flex gap-2"><span className="text-emerald-600">✓</span>In-chat quote/discount approval cards</li>
+                <li className="flex gap-2"><span className="text-emerald-600">✓</span>Sales-Ops agent templates marketplace</li>
+                <li className="flex gap-2"><span className="text-emerald-600">✓</span>Live integrations panel (Salesforce, Gong, Outreach)</li>
               </ul>
             </div>
           </aside>
@@ -226,7 +230,9 @@ export default function Home() {
                     onResolve={handleResolve}
                     settingsOpen={settingsOpen}
                     setSettingsOpen={setSettingsOpen}
+                    onOpenHero={() => setShowHero(true)}
                   />
+                  {showHero && <HeroOverlay onEnter={() => setShowHero(false)} />}
                 </div>
               </div>
             </div>
@@ -239,15 +245,16 @@ export default function Home() {
                 Available for Hire
               </p>
               <p className="text-xl text-white font-semibold leading-snug">
-                Fractional AI Product Manager &amp; AI Architect
+                Fractional AI Engineer, AI Product Manager, or AI Architect
               </p>
               <p className="text-sm text-slate-300 leading-relaxed">
-                I design and ship AI-native products end-to-end — from product strategy and
-                PRDs to working prototypes deployed to production. This MVP went from idea to live in under a week.
+                I design and ship vertical AI products end-to-end — from product strategy and PRDs to working prototypes deployed to production. This Sales-Ops MVP went from idea to live in under a week.
               </p>
               <div className="grid grid-cols-3 gap-2 pt-2">
                 <a
                   href="https://aurimas.io"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-lg bg-white text-slate-900 text-xs font-semibold hover:bg-amber-50 transition-colors"
                 >
                   <ExternalLink className="w-3.5 h-3.5" />
@@ -279,16 +286,16 @@ export default function Home() {
                 Try it on the phone
               </p>
               <ul className="space-y-1.5 text-xs text-slate-700 leading-relaxed">
-                <li><span className="font-semibold text-slate-900">Chat:</span> tap a suggestion or type &ldquo;Run daily report&rdquo; to see live workflows.</li>
-                <li><span className="font-semibold text-slate-900">Inbox{pendingCount > 0 ? ` (${pendingCount})` : ''}:</span> approve or reject queued agent requests.</li>
-                <li><span className="font-semibold text-slate-900">Agents:</span> install templates, configure, search.</li>
-                <li><span className="font-semibold text-slate-900">⚙ Settings:</span> integrations, notifications, theme.</li>
+                <li><span className="font-semibold text-slate-900">Chat:</span> tap a suggestion or type &ldquo;Run pipeline standup&rdquo; for a live workflow.</li>
+                <li><span className="font-semibold text-slate-900">Inbox{pendingCount > 0 ? ` (${pendingCount})` : ''}:</span> approve or reject queued quote/deal/renewal decisions.</li>
+                <li><span className="font-semibold text-slate-900">Agents:</span> 5 native sales agents, 9 templates to install.</li>
+                <li><span className="font-semibold text-slate-900">⚙ Settings:</span> Salesforce/Gong/Outreach connections + case study.</li>
               </ul>
             </div>
 
             <p className="text-center text-[11px] text-slate-500">
               <Sparkles className="inline w-3 h-3 text-amber-500 mr-1" />
-              Every button is wired and produces real results.
+              Every button is wired. Every transition works. Try it.
             </p>
           </aside>
         </div>

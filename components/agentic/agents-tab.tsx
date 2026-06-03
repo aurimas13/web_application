@@ -23,6 +23,10 @@ import {
   Trash2,
   Search,
   Sparkles,
+  TrendingUp,
+  Target,
+  Receipt,
+  Megaphone,
 } from 'lucide-react';
 import { useToast } from './toast';
 import TemplatesModal, { type AgentTemplate } from './templates-modal';
@@ -57,133 +61,134 @@ interface Agent {
 
 const INITIAL_AGENTS: Agent[] = [
   {
-    name: 'Data Analyst',
+    name: 'Pipeline Standup',
     description:
-      'Analyzes datasets and generates insights from your connected data sources.',
-    icon: BarChart3,
+      'Daily summary of pipeline movement, at-risk deals, and next-best actions for every rep.',
+    icon: TrendingUp,
     status: 'active',
-    tasks: 124,
-    lastRun: '2 min ago',
-    successRate: 97,
-    avgDuration: '45s',
+    tasks: 142,
+    lastRun: '6 min ago',
+    successRate: 98,
+    avgDuration: '38s',
     recentTasks: [
-      { id: '1', title: 'Q2 revenue breakdown by region', status: 'completed', time: '2 min ago' },
-      { id: '2', title: 'Customer churn correlation analysis', status: 'completed', time: '18 min ago' },
-      { id: '3', title: 'Pipeline velocity trend report', status: 'running', time: 'In progress' },
-      { id: '4', title: 'Weekly KPI snapshot', status: 'completed', time: '1 hr ago' },
-      { id: '5', title: 'Competitor pricing comparison', status: 'failed', time: '2 hrs ago' },
+      { id: '1', title: 'Monday standup — 12 reps · 84 deals scanned', status: 'completed', time: '6 min ago' },
+      { id: '2', title: 'Friday weekly forecast roll-up', status: 'completed', time: '3 days ago' },
+      { id: '3', title: 'EMEA territory deep-dive', status: 'running', time: 'In progress' },
+      { id: '4', title: 'New-logo win rate trend', status: 'completed', time: '1 day ago' },
+      { id: '5', title: 'Stage conversion anomaly check', status: 'failed', time: '2 days ago' },
     ],
     config: {
       model: 'GPT-4o',
-      schedule: 'On demand + hourly sync',
-      dataSources: ['Salesforce CRM', 'BigQuery', 'HubSpot'],
-      outputFormat: 'Charts & summary',
-    },
-    runHistory: [12, 18, 15, 22, 19, 25, 13],
-  },
-  {
-    name: 'Report Generator',
-    description:
-      'Creates comprehensive reports from multiple data streams automatically.',
-    icon: FileText,
-    status: 'active',
-    tasks: 89,
-    lastRun: '15 min ago',
-    successRate: 94,
-    avgDuration: '2m 10s',
-    recentTasks: [
-      { id: '1', title: 'Daily standup summary for #engineering', status: 'completed', time: '15 min ago' },
-      { id: '2', title: 'Sprint retrospective highlights', status: 'completed', time: '1 hr ago' },
-      { id: '3', title: 'Monthly board deck — financials', status: 'completed', time: '3 hrs ago' },
-      { id: '4', title: 'Customer success weekly digest', status: 'failed', time: '5 hrs ago' },
-    ],
-    config: {
-      model: 'GPT-4o',
-      schedule: 'Daily at 9:00 AM',
-      dataSources: ['Jira', 'Confluence', 'Google Sheets'],
+      schedule: 'Daily at 8:30 AM',
+      dataSources: ['Salesforce CRM', 'Slack', 'Gong'],
       outputFormat: 'PDF & Slack message',
     },
-    runHistory: [8, 14, 11, 9, 16, 12, 19],
+    runHistory: [14, 18, 21, 19, 24, 22, 28],
   },
   {
-    name: 'Email Drafter',
+    name: 'Deal Risk Analyzer',
     description:
-      'Composes and suggests email responses based on context and history.',
-    icon: Mail,
-    status: 'idle',
-    tasks: 56,
-    lastRun: '1 hr ago',
-    successRate: 91,
-    avgDuration: '12s',
+      'Flags stalled deals, missing decision-makers, and engagement drops in your top opportunities.',
+    icon: AlertCircle,
+    status: 'active',
+    tasks: 87,
+    lastRun: '12 min ago',
+    successRate: 96,
+    avgDuration: '1m 04s',
     recentTasks: [
-      { id: '1', title: 'Follow-up to Acme Corp proposal', status: 'completed', time: '1 hr ago' },
-      { id: '2', title: 'Meeting reschedule — Sarah K.', status: 'completed', time: '2 hrs ago' },
-      { id: '3', title: 'Partnership intro for Series B lead', status: 'completed', time: '3 hrs ago' },
+      { id: '1', title: 'Acme Corp ($120k) — no activity 14 days', status: 'completed', time: '12 min ago' },
+      { id: '2', title: 'Globex ($240k) — champion left company', status: 'completed', time: '38 min ago' },
+      { id: '3', title: 'Initech ($85k) — POC stalling', status: 'running', time: 'In progress' },
+      { id: '4', title: 'Top-20 watchlist refresh', status: 'completed', time: '2 hrs ago' },
     ],
     config: {
-      model: 'GPT-4o-mini',
-      schedule: 'On demand',
-      dataSources: ['Gmail', 'Calendar', 'CRM contacts'],
-      outputFormat: 'Draft email',
+      model: 'GPT-4o',
+      schedule: 'Hourly',
+      dataSources: ['Salesforce CRM', 'Gmail', 'Calendar', 'Gong'],
+      outputFormat: 'Structured brief',
     },
-    runHistory: [5, 9, 7, 3, 11, 8, 4],
+    runHistory: [9, 12, 11, 14, 10, 13, 16],
   },
   {
-    name: 'Strategy Advisor',
+    name: 'Quote Approver',
     description:
-      'Provides strategic recommendations based on market and internal data.',
-    icon: Brain,
+      'Reviews quotes against discount policy and routes anything off-policy for your approval.',
+    icon: Receipt,
     status: 'active',
-    tasks: 34,
-    lastRun: '5 min ago',
+    tasks: 64,
+    lastRun: '24 min ago',
     successRate: 99,
-    avgDuration: '1m 30s',
+    avgDuration: '22s',
     recentTasks: [
-      { id: '1', title: 'Competitive landscape update — AI SaaS', status: 'completed', time: '5 min ago' },
-      { id: '2', title: 'Market sizing for APAC expansion', status: 'running', time: 'In progress' },
-      { id: '3', title: 'Pricing strategy recommendation', status: 'completed', time: '2 hrs ago' },
-      { id: '4', title: 'Risk assessment — vendor dependency', status: 'completed', time: '4 hrs ago' },
+      { id: '1', title: 'Acme renewal — 18% discount (off-policy)', status: 'completed', time: '24 min ago' },
+      { id: '2', title: 'Globex expansion — within policy, auto-approved', status: 'completed', time: '1 hr ago' },
+      { id: '3', title: 'Initech multi-year — flagged for review', status: 'completed', time: '3 hrs ago' },
+      { id: '4', title: 'Wonka Industries — auto-approved', status: 'completed', time: '5 hrs ago' },
+    ],
+    config: {
+      model: 'GPT-4o',
+      schedule: 'Event-driven',
+      dataSources: ['Salesforce CPQ', 'HubSpot', 'Slack'],
+      outputFormat: 'Action log & notifications',
+    },
+    runHistory: [4, 7, 5, 9, 6, 8, 11],
+  },
+  {
+    name: 'Forecast Builder',
+    description:
+      'Generates committed / best-case / worst-case forecasts from rep call data and CRM signals.',
+    icon: Target,
+    status: 'active',
+    tasks: 28,
+    lastRun: '5 min ago',
+    successRate: 100,
+    avgDuration: '2m 18s',
+    recentTasks: [
+      { id: '1', title: 'Q3 forecast — committed $4.2M, best-case $5.7M', status: 'completed', time: '5 min ago' },
+      { id: '2', title: 'EMEA region call-down', status: 'completed', time: '2 hrs ago' },
+      { id: '3', title: 'Reps with slipping commit', status: 'completed', time: '1 day ago' },
+      { id: '4', title: 'Variance vs last week', status: 'completed', time: '7 days ago' },
     ],
     config: {
       model: 'GPT-4o',
       schedule: 'Weekly + on demand',
-      dataSources: ['Market feeds', 'Internal docs', 'Financial DB'],
-      outputFormat: 'Structured brief',
+      dataSources: ['Salesforce CRM', 'Gong', 'BigQuery'],
+      outputFormat: 'Charts & summary',
     },
-    runHistory: [3, 5, 4, 7, 6, 5, 4],
+    runHistory: [2, 4, 3, 5, 4, 4, 6],
   },
   {
-    name: 'Workflow Automator',
+    name: 'Outbound Sequencer',
     description:
-      'Orchestrates multi-step workflows across your integrated tools.',
-    icon: Zap,
+      'Drafts personalized outbound sequences and pauses any sequence with a flagged response.',
+    icon: Megaphone,
     status: 'idle',
-    tasks: 201,
-    lastRun: '30 min ago',
-    successRate: 96,
-    avgDuration: '55s',
+    tasks: 312,
+    lastRun: '42 min ago',
+    successRate: 92,
+    avgDuration: '18s',
     recentTasks: [
-      { id: '1', title: 'Onboarding pipeline — new hire batch', status: 'completed', time: '30 min ago' },
-      { id: '2', title: 'Invoice approval chain — Q2 vendors', status: 'completed', time: '1 hr ago' },
-      { id: '3', title: 'Deploy staging → production sync', status: 'failed', time: '2 hrs ago' },
-      { id: '4', title: 'Customer ticket escalation routing', status: 'completed', time: '3 hrs ago' },
-      { id: '5', title: 'Data backup and compliance check', status: 'completed', time: '5 hrs ago' },
+      { id: '1', title: 'CFOs at Series B fintechs — 24 drafts', status: 'completed', time: '42 min ago' },
+      { id: '2', title: 'Re-engage cold opps from Q1', status: 'completed', time: '2 hrs ago' },
+      { id: '3', title: 'Paused: hostile reply from Globex CTO', status: 'completed', time: '4 hrs ago' },
+      { id: '4', title: 'LinkedIn touch — top 50 ICP accounts', status: 'completed', time: '6 hrs ago' },
+      { id: '5', title: 'Webinar follow-ups — 88 contacts', status: 'failed', time: '1 day ago' },
     ],
     config: {
       model: 'GPT-4o-mini',
       schedule: 'Event-driven',
-      dataSources: ['Slack', 'Jira', 'Zapier', 'GitHub'],
-      outputFormat: 'Action log & notifications',
+      dataSources: ['Outreach', 'Apollo', 'LinkedIn Sales Nav', 'Gmail'],
+      outputFormat: 'Draft email',
     },
-    runHistory: [20, 28, 35, 22, 30, 25, 41],
+    runHistory: [38, 44, 51, 42, 56, 47, 62],
   },
 ];
 
-const AVAILABLE_ICONS = [BarChart3, FileText, Mail, Brain, Zap, Bot];
+const AVAILABLE_ICONS = [TrendingUp, AlertCircle, Receipt, Target, Megaphone, Bot];
 const MODEL_OPTIONS = ['GPT-4o', 'GPT-4o-mini', 'GPT-4-turbo', 'Claude 3.5 Sonnet'];
-const SCHEDULE_OPTIONS = ['On demand', 'Hourly', 'Daily at 9:00 AM', 'Weekly', 'Event-driven'];
+const SCHEDULE_OPTIONS = ['On demand', 'Hourly', 'Daily at 8:30 AM', 'Weekly', 'Event-driven'];
 const OUTPUT_OPTIONS = ['Charts & summary', 'PDF & Slack message', 'Draft email', 'Structured brief', 'Action log & notifications'];
-const ALL_DATA_SOURCES = ['Salesforce CRM', 'BigQuery', 'HubSpot', 'Jira', 'Confluence', 'Google Sheets', 'Gmail', 'Calendar', 'Slack', 'GitHub', 'Zapier', 'Market feeds', 'Internal docs', 'Financial DB', 'CRM contacts'];
+const ALL_DATA_SOURCES = ['Salesforce CRM', 'Salesforce CPQ', 'HubSpot', 'Outreach', 'Apollo', 'Gong', 'LinkedIn Sales Nav', 'Gmail', 'Calendar', 'Slack', 'BigQuery', 'Stripe', 'Snowflake', 'Internal docs', 'CRM contacts'];
 
 function MiniBarChart({ data }: { data: number[] }) {
   const max = Math.max(...data);
@@ -490,18 +495,26 @@ function AgentDetail({
   onBack,
   onDelete,
   onUpdateConfig,
+  onTaskClick,
+  onToggleRun,
 }: {
   agent: Agent;
   onBack: () => void;
   onDelete: () => void;
   onUpdateConfig: (c: AgentConfig) => void;
+  onTaskClick: (task: RecentTask) => void;
+  onToggleRun: (running: boolean) => void;
 }) {
   const [isRunning, setIsRunning] = useState(agent.status === 'active');
   const [showSettings, setShowSettings] = useState(false);
 
   const handleToggle = useCallback(() => {
-    setIsRunning((prev) => !prev);
-  }, []);
+    setIsRunning((prev) => {
+      const next = !prev;
+      onToggleRun(next);
+      return next;
+    });
+  }, [onToggleRun]);
 
   const Icon = agent.icon;
 
@@ -616,16 +629,18 @@ function AgentDetail({
               </p>
             ) : (
               agent.recentTasks.map((task) => (
-                <div
+                <button
                   key={task.id}
-                  className="flex items-center gap-2.5 bg-white border border-stone-200 rounded-lg px-3 py-2.5"
+                  onClick={() => onTaskClick(task)}
+                  className="w-full flex items-center gap-2.5 bg-white border border-stone-200 rounded-lg px-3 py-2.5 hover:border-slate-900/20 hover:bg-stone-50 transition-colors text-left active:scale-[0.99]"
                 >
                   <TaskStatusIcon status={task.status} />
                   <div className="flex-1 min-w-0">
                     <p className="text-xs text-slate-800 truncate">{task.title}</p>
                     <p className="text-[10px] text-slate-500">{task.time}</p>
                   </div>
-                </div>
+                  <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
+                </button>
               ))
             )}
           </div>
@@ -736,6 +751,19 @@ export default function AgentsTab() {
       <AgentDetail
         agent={agent}
         onBack={() => setSelectedAgentIdx(null)}
+        onTaskClick={(task) => {
+          push(
+            task.status === 'failed' ? 'error' : 'info',
+            task.status === 'running'
+              ? `${task.title} — still running`
+              : task.status === 'failed'
+              ? `${task.title} — failed. Logs opened in detail view.`
+              : `${task.title} — output ready`
+          );
+        }}
+        onToggleRun={(running) => {
+          push('success', `${agent.name} ${running ? 'started' : 'paused'}`);
+        }}
         onDelete={() => {
           const removed = agents[selectedAgentIdx];
           setAgents((prev) => prev.filter((_, i) => i !== selectedAgentIdx));

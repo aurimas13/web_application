@@ -10,7 +10,7 @@
 
 🔗 **[Live Demo → agentic.aurimas.io](https://agentic.aurimas.io)** &nbsp;·&nbsp; [← Back to aurimas.io](https://aurimas.io) &nbsp;·&nbsp; [LinkedIn](https://www.linkedin.com/in/aurimasnausedas/)
 
-> **Available for hire** — Fractional AI Product Manager & AI Architect. I design and ship AI-native products end-to-end, from strategy to deployed prototypes. [Get in touch →](https://aurimas.io)
+> **Available for hire** — Fractional AI Engineer, AI Product Manager, or AI Architect. I design and ship AI-native products end-to-end, from strategy to deployed prototypes. [Get in touch →](https://aurimas.io)
 
 ---
 

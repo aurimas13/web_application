@@ -20,10 +20,10 @@ const METRICS = [
 ];
 
 const FEATURES = [
-  { icon: MessageSquare, title: 'AI Chat', desc: 'GPT-4o-powered conversational assistant with streaming replies' },
-  { icon: Bot, title: 'Agent Management', desc: 'Create, configure, pause, and remove AI agents in-app' },
-  { icon: Zap, title: 'Agentic Workflows', desc: 'Multi-step automated pipelines with live step-by-step progress' },
-  { icon: Eye, title: 'Product Vision', desc: 'Full PRD with UX principles and success metrics' },
+  { icon: MessageSquare, title: 'Streaming Sales Chat', desc: 'GPT-4o-mini wired to your CRM, call data, and inbox — with voice input' },
+  { icon: Bot, title: 'Sales Agents', desc: 'Pipeline Standup, Deal Risk, Quote Approver, Forecast Builder, Outbound Sequencer' },
+  { icon: Zap, title: 'Live Approvals', desc: 'In-chat quote/discount approval cards — decide from your phone in &lt;30s' },
+  { icon: Eye, title: 'Sales-Ops PRD', desc: 'Full product brief with metrics, principles, and tech architecture' },
 ];
 
 export default function HeroOverlay({ onEnter }: { onEnter: () => void }) {
@@ -62,7 +62,7 @@ export default function HeroOverlay({ onEnter }: { onEnter: () => void }) {
             Agentic Mobile
           </h1>
           <p className="text-base text-teal-700 font-medium">
-            B2B AI Agent Workspace for Decision-Makers on the Go
+            AI Sales-Ops Workspace for leaders on the go
           </p>
         </div>
 
@@ -72,10 +72,8 @@ export default function HeroOverlay({ onEnter }: { onEnter: () => void }) {
             The Problem
           </p>
           <p className="text-sm text-slate-700 leading-relaxed">
-            B2B leaders need to approve workflows, review agent outputs, and access insights
-            <span className="text-slate-900 font-medium"> from their phone</span> —
-            but today&apos;s tools return unreadable walls of text on a 6-inch screen.
-            Decisions stall for hours because the right person isn&apos;t at their desk.
+            Sales leaders run their day from their phone — between meetings, in cars, walking into 1:1s. But the tools that hold their
+            <span className="text-slate-900 font-medium"> pipeline, forecast, quotes, and call data</span> are desktop-first. Approvals stall, deals slip, reps wait.
           </p>
         </div>
 
@@ -85,9 +83,8 @@ export default function HeroOverlay({ onEnter }: { onEnter: () => void }) {
             The Solution
           </p>
           <p className="text-sm text-slate-700 leading-relaxed">
-            <span className="text-slate-900 font-medium">Action-Oriented Generative UI</span> —
-            instead of text replies, the AI renders native approval cards, inline charts, and
-            live multi-step workflow progress directly in a mobile conversational feed.
+            A <span className="text-slate-900 font-medium">Sales-Ops AI workspace built mobile-first.</span>
+            Voice-driven chat, in-feed approval cards for off-policy quotes, live pipeline standups, and a queue of decisions waiting for one tap. Wired into Salesforce, HubSpot, Outreach, Gong.
           </p>
         </div>
 
@@ -165,19 +162,19 @@ export default function HeroOverlay({ onEnter }: { onEnter: () => void }) {
             {[
               {
                 label: 'Problem',
-                text: 'B2B mobile workflows rarely get AI agent treatment — sales, field ops, and service teams work on mobile but AI tools are desktop-first',
+                text: 'Sales leaders run revenue from their phones, but Salesforce, Outreach, and Gong are desktop-first. Approvals stall, deals slip, forecasts decay.',
               },
               {
                 label: 'Approach',
-                text: 'Agent-driven mobile MVP for workflow approvals, real-time reporting, and multi-agent orchestration',
+                text: 'A mobile-first Sales-Ops AI workspace with voice chat, in-feed approval cards, sales-tuned agents, and a one-tap inbox queue.',
               },
               {
                 label: 'Role',
-                text: 'Concept, prototype, user flow design, full-stack implementation',
+                text: 'Product strategy, PRD, prototype, full-stack implementation — from zero to live in under a week.',
               },
               {
                 label: 'What this proves',
-                text: 'Speed of AI product prototyping — built from zero to deployed MVP in under a week',
+                text: 'Vertical-specific AI agents + generative UI beat generic chatbots for B2B mobile decision velocity.',
               },
             ].map((item) => (
               <div key={item.label}>
@@ -196,9 +193,14 @@ export default function HeroOverlay({ onEnter }: { onEnter: () => void }) {
           Explore the Prototype →
         </button>
 
-        <p className="text-center text-[11px] text-slate-500">
-          Tip: try typing <span className="font-medium text-slate-700">&quot;Run daily report&quot;</span> in chat to see an agentic workflow in action.
-        </p>
+        <div className="text-center text-[11px] text-slate-500 space-y-1">
+          <p>
+            Try: <span className="font-medium text-slate-700">&ldquo;Run pipeline standup&rdquo;</span> for a live workflow,
+          </p>
+          <p>
+            or <span className="font-medium text-slate-700">&ldquo;Approve Acme quote&rdquo;</span> to see an in-chat approval card.
+          </p>
+        </div>
 
         {/* Hire Me / Contact */}
         <div className="bg-gradient-to-br from-slate-900 to-slate-700 rounded-2xl px-5 py-5 text-center space-y-3 shadow-lg shadow-slate-900/20">
@@ -206,7 +208,7 @@ export default function HeroOverlay({ onEnter }: { onEnter: () => void }) {
             Available for Hire
           </p>
           <p className="text-sm text-white font-medium leading-snug">
-            Looking for a Fractional AI Product Manager or AI Architect?
+            Looking for a Fractional AI Engineer, AI Product Manager, or AI Architect?
           </p>
           <p className="text-xs text-slate-300 leading-relaxed">
             I design and ship AI-native products end-to-end — from strategy and PRDs to working prototypes. Let&apos;s build.

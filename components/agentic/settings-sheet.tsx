@@ -17,6 +17,11 @@ import {
   Database,
   Calendar,
   FileText,
+  Mic2,
+  Headphones,
+  Linkedin,
+  Sparkles,
+  ExternalLink,
 } from 'lucide-react';
 import { useToast } from './toast';
 
@@ -28,21 +33,25 @@ interface Integration {
 }
 
 const INITIAL_INTEGRATIONS: Integration[] = [
+  { name: 'Salesforce', icon: Database, connected: true, category: 'CRM' },
+  { name: 'HubSpot', icon: Database, connected: true, category: 'CRM' },
+  { name: 'Outreach', icon: Mic2, connected: true, category: 'Sales Engagement' },
+  { name: 'Gong', icon: Headphones, connected: true, category: 'Conversation Intelligence' },
+  { name: 'Apollo', icon: Database, connected: false, category: 'Prospecting' },
+  { name: 'LinkedIn Sales Nav', icon: Linkedin, connected: true, category: 'Prospecting' },
   { name: 'Slack', icon: Slack, connected: true, category: 'Messaging' },
   { name: 'Gmail', icon: Mail, connected: true, category: 'Email' },
-  { name: 'HubSpot', icon: Database, connected: true, category: 'CRM' },
-  { name: 'Salesforce', icon: Database, connected: false, category: 'CRM' },
-  { name: 'Notion', icon: FileText, connected: true, category: 'Docs' },
-  { name: 'GitHub', icon: Github, connected: false, category: 'Dev' },
   { name: 'Google Calendar', icon: Calendar, connected: true, category: 'Calendar' },
 ];
 
 export default function SettingsSheet({
   open,
   onClose,
+  onViewCaseStudy,
 }: {
   open: boolean;
   onClose: () => void;
+  onViewCaseStudy: () => void;
 }) {
   const { push } = useToast();
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
@@ -209,6 +218,73 @@ export default function SettingsSheet({
               </div>
               <ChevronRight className="w-4 h-4 text-slate-400" />
             </button>
+          </Section>
+
+          {/* About */}
+          <Section icon={Sparkles} title="About">
+            <div className="bg-white border border-stone-200 rounded-xl divide-y divide-stone-100">
+              <button
+                onClick={() => {
+                  onClose();
+                  setTimeout(onViewCaseStudy, 320);
+                }}
+                className="w-full flex items-center gap-3 px-3.5 py-3 hover:bg-stone-50 transition-colors text-left"
+              >
+                <div className="w-8 h-8 rounded-lg bg-amber-50 flex items-center justify-center flex-shrink-0">
+                  <FileText className="w-4 h-4 text-amber-700" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-xs font-medium text-slate-900 leading-tight">View case study &amp; PRD</p>
+                  <p className="text-[10px] text-slate-500 leading-tight">Problem, approach, metrics, and tech stack</p>
+                </div>
+                <ChevronRight className="w-4 h-4 text-slate-400" />
+              </button>
+              <a
+                href="https://aurimas.io"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full flex items-center gap-3 px-3.5 py-3 hover:bg-stone-50 transition-colors text-left"
+              >
+                <div className="w-8 h-8 rounded-lg bg-stone-100 flex items-center justify-center flex-shrink-0">
+                  <ExternalLink className="w-4 h-4 text-slate-700" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-xs font-medium text-slate-900 leading-tight">Portfolio</p>
+                  <p className="text-[10px] text-slate-500 leading-tight">aurimas.io</p>
+                </div>
+                <ChevronRight className="w-4 h-4 text-slate-400" />
+              </a>
+              <a
+                href="https://www.linkedin.com/in/aurimasnausedas/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full flex items-center gap-3 px-3.5 py-3 hover:bg-stone-50 transition-colors text-left"
+              >
+                <div className="w-8 h-8 rounded-lg bg-stone-100 flex items-center justify-center flex-shrink-0">
+                  <Linkedin className="w-4 h-4 text-slate-700" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-xs font-medium text-slate-900 leading-tight">LinkedIn</p>
+                  <p className="text-[10px] text-slate-500 leading-tight">Connect with the builder</p>
+                </div>
+                <ChevronRight className="w-4 h-4 text-slate-400" />
+              </a>
+              <a
+                href="https://github.com/aurimas13/web_application"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full flex items-center gap-3 px-3.5 py-3 hover:bg-stone-50 transition-colors text-left"
+              >
+                <div className="w-8 h-8 rounded-lg bg-stone-100 flex items-center justify-center flex-shrink-0">
+                  <Github className="w-4 h-4 text-slate-700" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-xs font-medium text-slate-900 leading-tight">Source code</p>
+                  <p className="text-[10px] text-slate-500 leading-tight">github.com/aurimas13/web_application</p>
+                </div>
+                <ChevronRight className="w-4 h-4 text-slate-400" />
+              </a>
+            </div>
           </Section>
 
           {/* Sign out */}

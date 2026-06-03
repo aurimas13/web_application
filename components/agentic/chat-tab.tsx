@@ -8,8 +8,8 @@ import {
   MicOff,
   Settings as SettingsIcon,
   TrendingUp,
-  CalendarCheck,
-  ShieldCheck,
+  AlertCircle,
+  Receipt,
   Mail,
 } from 'lucide-react';
 import AgenticAction from './agentic-action';
@@ -32,17 +32,17 @@ const INITIAL_MESSAGES: ChatMessage[] = [
     id: '1',
     role: 'assistant',
     content:
-      "Welcome to Agentic Mobile. I'm your AI workspace assistant — I can analyze data, draft reports, run multi-step workflows, and queue approvals for your decision.\n\nTry one of the suggestions below, or ask me anything.",
+      "Welcome to your Sales-Ops AI workspace. I'm wired into your CRM, call recordings, and email — I can run pipeline analyses, surface deal risks, route quote approvals, and draft outbound from your phone.\n\nTap a suggestion below, or ask me anything sales-ops.",
     type: 'text',
     timestamp: new Date(),
   },
 ];
 
 const SUGGESTIONS = [
-  { icon: TrendingUp, label: 'Run daily report', prompt: 'Run daily report' },
-  { icon: ShieldCheck, label: 'Approve Q3 budget', prompt: 'Send the Q3 marketing budget for my approval' },
-  { icon: CalendarCheck, label: 'Brief me on next meeting', prompt: 'Brief me on my next meeting' },
-  { icon: Mail, label: 'Draft a follow-up email', prompt: 'Draft a follow-up email to the Acme Corp lead' },
+  { icon: TrendingUp, label: 'Run pipeline standup', prompt: 'Run pipeline standup' },
+  { icon: Receipt, label: 'Approve Acme quote', prompt: 'Approve the Acme renewal quote' },
+  { icon: AlertCircle, label: 'Stalled deals report', prompt: 'Show me stalled deals over $100k' },
+  { icon: Mail, label: 'Draft Acme follow-up', prompt: 'Draft a follow-up email to the Acme Corp lead' },
 ];
 
 function isAgenticCommand(message: string): boolean {
@@ -50,41 +50,59 @@ function isAgenticCommand(message: string): boolean {
   return (
     lower.includes('run daily report') ||
     lower.includes('run report') ||
-    lower.includes('generate report')
+    lower.includes('generate report') ||
+    lower.includes('pipeline standup') ||
+    lower.includes('run standup') ||
+    lower.includes('stalled deal') ||
+    lower.includes('build forecast') ||
+    lower.includes('run forecast')
   );
 }
 
 function isApprovalCommand(message: string): InboxItem | null {
   const lower = message.toLowerCase().trim();
-  if (lower.includes('q3') && (lower.includes('approve') || lower.includes('approval') || lower.includes('budget'))) {
+  if (lower.includes('approve') && lower.includes('acme')) {
     return {
       id: `chat-approval-${Date.now()}`,
-      agent: 'Finance Agent',
-      title: 'Approve Q3 marketing budget — $284,000',
-      summary: 'Quarterly budget request submitted by the marketing team for paid acquisition, events, and content.',
-      amount: '$284,000',
+      agent: 'Quote Approver',
+      title: 'Acme Corp renewal — 18% discount (off-policy)',
+      summary: '3-year renewal at $312k ARR with 18% discount. Standard policy caps discount at 15%.',
+      amount: '$312,000 ARR',
       context: [
-        '12% over Q2 actual spend',
-        'Within annual plan envelope',
-        'CFO pre-reviewed Apr 22',
+        'Champion: Sarah Kim, VP Eng',
+        'CSAT 92, NPS 8.4 — healthy account',
+        'Competing with HashiCorp — they offered 22%',
       ],
-      rationale:
-        'Recommended by Finance Agent based on YTD pacing and Q3 pipeline targets. ROI projection: 3.4x.',
+      rationale: 'Quote Approver flagged as off-policy. Win-rate at this discount tier historically 78%.',
       priority: 'high',
       receivedAt: 'Just now',
       status: 'pending',
     };
   }
-  if (lower.includes('approve') && (lower.includes('expense') || lower.includes('contract') || lower.includes('vendor'))) {
+  if (lower.includes('approve') && (lower.includes('discount') || lower.includes('quote') || lower.includes('deal'))) {
     return {
       id: `chat-approval-${Date.now()}`,
-      agent: 'Compliance Agent',
-      title: 'Vendor contract — Datadog renewal',
-      summary: 'Annual renewal at $48,200/yr. Terms unchanged. Auto-renews in 6 days unless rejected.',
-      amount: '$48,200 / yr',
-      context: ['Existing vendor since 2023', 'No security flags', 'Within IT budget'],
-      rationale: 'Compliance Agent reviewed terms; no material changes from prior contract.',
+      agent: 'Quote Approver',
+      title: 'Initech multi-year quote — 12% discount',
+      summary: '2-year deal at $185k TCV. Discount within policy. Auto-approves in 4 hours unless rejected.',
+      amount: '$185,000 TCV',
+      context: ['New logo — first deal', 'CFO sign-off captured Jun 1', 'Procurement legal review clean'],
+      rationale: 'Quote Approver: within policy on price + terms. No flags.',
       priority: 'medium',
+      receivedAt: 'Just now',
+      status: 'pending',
+    };
+  }
+  if (lower.includes('approve') && (lower.includes('budget') || lower.includes('q3') || lower.includes('q4'))) {
+    return {
+      id: `chat-approval-${Date.now()}`,
+      agent: 'RevOps Agent',
+      title: 'Approve Q3 sales tooling budget — $284,000',
+      summary: 'Outreach + Gong + Apollo renewal bundle. 12% over Q2 actuals. CFO pre-reviewed.',
+      amount: '$284,000',
+      context: ['Within annual plan envelope', 'CFO pre-reviewed Apr 22', 'Tied to 18% pipeline coverage target'],
+      rationale: 'RevOps Agent: justified by YTD pipeline coverage and rep productivity gains.',
+      priority: 'high',
       receivedAt: 'Just now',
       status: 'pending',
     };

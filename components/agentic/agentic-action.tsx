@@ -1,18 +1,20 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Check, Loader as Loader2, Circle, Zap } from 'lucide-react';
+import { Check, Loader as Loader2, Circle, Zap, MessageSquare, FileText, ArrowRight } from 'lucide-react';
+import { useToast } from './toast';
 
 const WORKFLOW_STEPS = [
-  { label: 'Connecting to data sources', duration: 1200 },
-  { label: 'Fetching CRM records', duration: 1800 },
-  { label: 'Running analysis pipeline', duration: 2200 },
-  { label: 'Generating report', duration: 1500 },
+  { label: 'Connecting to Salesforce + Gong', duration: 1100 },
+  { label: 'Pulling 84 active deals', duration: 1600 },
+  { label: 'Scoring deal risk + velocity', duration: 1900 },
+  { label: 'Generating standup brief', duration: 1400 },
 ];
 
 export default function AgenticAction() {
   const [currentStep, setCurrentStep] = useState(0);
   const [isComplete, setIsComplete] = useState(false);
+  const { push } = useToast();
 
   useEffect(() => {
     if (isComplete) return;
@@ -35,7 +37,7 @@ export default function AgenticAction() {
           <Zap className="w-3.5 h-3.5 text-teal-700" />
         </div>
         <span className="text-[10px] font-semibold text-slate-700 tracking-widest uppercase">
-          Agentic Workflow
+          Pipeline Standup · Live
         </span>
       </div>
 
@@ -81,15 +83,45 @@ export default function AgenticAction() {
       </div>
 
       {isComplete && (
-        <div className="mt-4 pt-3 border-t border-stone-200">
+        <div className="mt-4 pt-3 border-t border-stone-200 space-y-3">
           <div className="flex items-center gap-2">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
             </span>
             <span className="text-xs text-emerald-600 font-medium">
-              Daily report generated successfully
+              Standup ready — 12 reps, 84 deals, 3 risks
             </span>
+          </div>
+
+          <div className="bg-stone-50 rounded-lg p-2.5 space-y-1.5">
+            <div className="flex items-center justify-between text-[11px]">
+              <span className="text-slate-600">Pipeline coverage</span>
+              <span className="font-semibold text-emerald-700">3.4x</span>
+            </div>
+            <div className="flex items-center justify-between text-[11px]">
+              <span className="text-slate-600">Deals at risk</span>
+              <span className="font-semibold text-amber-700">3 · $445k</span>
+            </div>
+            <div className="flex items-center justify-between text-[11px]">
+              <span className="text-slate-600">Commit vs target</span>
+              <span className="font-semibold text-slate-900">$4.2M / $5.0M</span>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-2">
+            <button
+              onClick={() => push('success', 'Standup posted to #sales-leadership')}
+              className="flex items-center justify-center gap-1.5 py-2 rounded-lg bg-stone-100 hover:bg-stone-200 text-slate-700 text-xs font-semibold transition-colors active:scale-95"
+            >
+              <MessageSquare className="w-3.5 h-3.5" /> Slack
+            </button>
+            <button
+              onClick={() => push('info', 'Opening full report…')}
+              className="flex items-center justify-center gap-1.5 py-2 rounded-lg bg-slate-900 text-white hover:bg-slate-800 text-xs font-semibold transition-colors active:scale-95"
+            >
+              <FileText className="w-3.5 h-3.5" /> Open <ArrowRight className="w-3 h-3" />
+            </button>
           </div>
         </div>
       )}

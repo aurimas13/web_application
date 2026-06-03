@@ -13,8 +13,10 @@ export const metadata: Metadata = {
   description:
     'A mobile-first AI agent workspace for B2B decision-makers. Manage agents, approve workflows, and access insights on the go. Built with Next.js, OpenAI, and Supabase by Aurimas A. Nausėdas.',
   keywords: [
+    'AI Engineer',
     'AI Product Manager',
     'AI Architect',
+    'Fractional AI Engineer',
     'Fractional AI PM',
     'B2B AI',
     'Agentic AI',
@@ -38,7 +40,7 @@ export const metadata: Metadata = {
     url: SITE_URL,
     title: 'Agentic Mobile — B2B AI Agent Workspace',
     description:
-      'Mobile-first AI agent workspace. A case study by Aurimas A. Nausėdas — Fractional AI Product Manager & AI Architect.',
+      'Mobile-first AI agent workspace. A case study by Aurimas A. Nausėdas — Fractional AI Engineer, AI Product Manager, or AI Architect.',
     siteName: 'Agentic Mobile',
     images: [
       {
@@ -53,7 +55,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Agentic Mobile — B2B AI Agent Workspace',
     description:
-      'Mobile-first AI agent workspace. A case study by Aurimas A. Nausėdas — Fractional AI PM & AI Architect.',
+      'Mobile-first AI agent workspace. A case study by Aurimas A. Nausėdas — Fractional AI Engineer, AI PM, or AI Architect.',
     images: [OG_IMAGE],
   },
   icons: {

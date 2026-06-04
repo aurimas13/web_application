@@ -36,7 +36,7 @@
     <g><rect width="490" height="44" rx="22" fill="#FFFFFF" stroke="#E7E5E0"/><circle cx="22" cy="22" r="4.5" fill="#0D9488"/><text x="38" y="27" fill="#0F172A">Streaming GPT-4o-mini chat</text></g>
     <g transform="translate(0 56)"><rect width="490" height="44" rx="22" fill="#FFFFFF" stroke="#E7E5E0"/><circle cx="22" cy="22" r="4.5" fill="#DC2626"/><text x="38" y="27" fill="#0F172A">Voice input (Web Speech API)</text></g>
     <g transform="translate(0 112)"><rect width="490" height="44" rx="22" fill="#FFFFFF" stroke="#E7E5E0"/><circle cx="22" cy="22" r="4.5" fill="#F59E0B"/><text x="38" y="27" fill="#0F172A">In-chat approval cards</text></g>
-    <g transform="translate(0 168)"><rect width="490" height="44" rx="22" fill="#FFFFFF" stroke="#E7E5E0"/><circle cx="22" cy="22" r="4.5" fill="#7C3AED"/><text x="38" y="27" fill="#0F172A">9 agent templates · 7 integrations</text></g>
+    <g transform="translate(0 168)"><rect width="490" height="44" rx="22" fill="#FFFFFF" stroke="#E7E5E0"/><circle cx="22" cy="22" r="4.5" fill="#7C3AED"/><text x="38" y="27" fill="#0F172A">9 agent templates · 9 integrations</text></g>
     <g transform="translate(0 224)"><rect width="490" height="44" rx="22" fill="#FFFFFF" stroke="#E7E5E0"/><circle cx="22" cy="22" r="4.5" fill="#15803D"/><text x="38" y="27" fill="#0F172A">Inbox approval queue with badges</text></g>
     <g transform="translate(0 280)"><rect width="490" height="44" rx="22" fill="#FFFFFF" stroke="#E7E5E0"/><circle cx="22" cy="22" r="4.5" fill="#0369A1"/><text x="38" y="27" fill="#0F172A">Generative UI rendered as actions</text></g>
   </g>
@@ -108,7 +108,6 @@
         <text x="20" y="56" font-family="Inter, system-ui, sans-serif" font-size="15" font-weight="700" fill="#0F172A">Approve Q3 marketing budget</text>
         <text x="20" y="76" font-family="Inter, system-ui, sans-serif" font-size="15" font-weight="700" fill="#0F172A">$284,000</text>
         <text x="20" y="100" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#475569">12% over Q2. CFO pre-reviewed.</text>
-        <text x="20" y="118" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#475569">ROI projection 3.4x.</text>
         <g transform="translate(20 130)">
           <rect width="158" height="32" rx="8" fill="#F1F5F9"/>
           <text x="79" y="20" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="700" fill="#475569">Reject</text>

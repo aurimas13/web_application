@@ -51,23 +51,23 @@ const uxPrinciples = [
 
 const successMetrics = [
   {
-    metric: '< 15 min',
-    label: 'Time-to-decision for off-policy quote approvals (from hours)',
+    metric: 'Hours → min',
+    label: 'Cut time-to-decision on off-policy quote approvals',
     type: 'Decision Velocity',
   },
   {
-    metric: '> 2 / day',
-    label: 'Agent runs per sales leader per mobile session',
+    metric: 'Daily use',
+    label: 'Agent runs per sales leader from mobile, between meetings',
     type: 'Engagement',
   },
   {
-    metric: '+8% pts',
-    label: 'Forecast accuracy uplift from real-time deal-risk signals',
+    metric: 'Forecast',
+    label: 'Forecast accuracy from real-time deal-risk signals',
     type: 'Revenue Impact',
   },
   {
     metric: 'D7 / D30',
-    label: 'Mobile retention — voice vs text users',
+    label: 'Mobile retention — voice vs text adoption',
     type: 'Stickiness',
   },
 ];
@@ -105,7 +105,7 @@ export default function VisionTab() {
             <div className="flex items-center gap-4 mt-2">
               <span className="flex items-center gap-1.5 text-[10px] text-slate-500">
                 <Clock className="w-3 h-3" />
-                Target: Q3 2026
+                Stage: Working prototype
               </span>
               <span className="flex items-center gap-1.5 text-[10px] text-slate-500">
                 <Users className="w-3 h-3" />
@@ -113,7 +113,7 @@ export default function VisionTab() {
               </span>
             </div>
             <p className="text-[11px] text-slate-500 mt-1.5">
-              Authored by Aurimas A. Nausėdas — built in &lt; 1 week
+              Authored by Aurimas A. Nausėdas
             </p>
           </div>
 
@@ -165,7 +165,7 @@ export default function VisionTab() {
               3. Native Sales-Ops Agents
             </h2>
             <p className="text-sm text-slate-600 leading-relaxed mb-3">
-              Five vertical-tuned agents shipped at v1, plus a templates marketplace for new ones:
+              Five vertical-tuned agents in the prototype, plus a templates marketplace for new ones:
             </p>
             <div className="space-y-1.5">
               {[
@@ -216,7 +216,7 @@ export default function VisionTab() {
 
           {/* 5. Success Metrics */}
           <section>
-            <h2 className="text-base font-semibold text-slate-800 mb-3">5. Success Metrics</h2>
+            <h2 className="text-base font-semibold text-slate-800 mb-3">5. Success Metrics We&apos;d Track</h2>
             <div className="space-y-2">
               {successMetrics.map((item) => (
                 <div
@@ -244,7 +244,7 @@ export default function VisionTab() {
                 { layer: 'AI Engine', tech: 'OpenAI streaming · Web Speech API' },
                 { layer: 'Integrations', tech: 'Salesforce · HubSpot · Outreach · Gong · Apollo' },
                 { layer: 'Backend', tech: 'Supabase · Edge Functions' },
-                { layer: 'Hosting', tech: 'Vercel · auto-deploy on push' },
+                { layer: 'Hosting', tech: 'Netlify · auto-deploy on push' },
               ].map((item) => (
                 <div
                   key={item.layer}
@@ -268,7 +268,7 @@ export default function VisionTab() {
               I design and ship vertical AI products end-to-end — from PRD to live MVP — as a Fractional AI Engineer, AI PM, or AI Architect.
             </p>
             <p className="text-xs text-slate-300 leading-relaxed">
-              This entire prototype shipped in under a week. Ping me to scope yours.
+              Ping me to scope yours.
             </p>
             <div className="grid grid-cols-3 gap-2 pt-1">
               <a

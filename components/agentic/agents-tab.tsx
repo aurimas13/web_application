@@ -867,7 +867,7 @@ export default function AgentsTab() {
               <h2 className="text-sm font-semibold text-slate-900">AI Agents</h2>
               <p className="text-[10px] text-slate-600">
                 {agents.filter((a) => a.status === 'active').length} active of{' '}
-                {agents.length} configured
+                {agents.length} configured · sample data
               </p>
             </div>
           </div>

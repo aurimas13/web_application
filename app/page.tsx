@@ -176,14 +176,14 @@ export default function Home() {
               </p>
             </div>
             <p className="text-sm text-slate-600 leading-relaxed">
-              Sales leaders run revenue from their phones — but Salesforce, Outreach, and Gong are desktop-first. Approvals stall, deals slip. This prototype proves
-              <span className="text-slate-900 font-medium"> action-oriented generative UI</span> wins on mobile: the AI renders approval cards, pipeline standups, and forecast tiles right inside the chat feed. Every decision is one tap.
+              Sales leaders run revenue from their phones — but Salesforce, Outreach, and Gong are desktop-first. Approvals stall, deals slip. This prototype shows how
+              <span className="text-slate-900 font-medium"> action-oriented generative UI</span> works on mobile: the AI renders approval cards, pipeline standups, and forecast tiles right inside the chat feed. Every decision is one tap.
             </p>
             <div className="grid grid-cols-3 gap-2">
               {[
-                { v: '< 15 min', l: 'Quote approval', Icon: Zap },
-                { v: '5 native', l: 'Sales agents', Icon: TrendingUp },
-                { v: '+8% pts', l: 'Forecast accuracy', Icon: Target },
+                { v: '5', l: 'Native sales agents', Icon: TrendingUp },
+                { v: '9', l: 'Agent templates', Icon: Target },
+                { v: 'Voice', l: 'Speech-to-text input', Icon: Zap },
               ].map((m) => (
                 <div
                   key={m.l}
@@ -196,7 +196,7 @@ export default function Home() {
               ))}
             </div>
             <div className="flex flex-wrap gap-1.5">
-              {['Next.js', 'TypeScript', 'Tailwind', 'OpenAI', 'Supabase', 'Vercel'].map((t) => (
+              {['Next.js', 'TypeScript', 'Tailwind', 'OpenAI', 'Supabase', 'Netlify'].map((t) => (
                 <span
                   key={t}
                   className="px-2.5 py-1 rounded-md text-[10px] font-medium bg-white border border-stone-200 text-slate-700"
@@ -214,7 +214,7 @@ export default function Home() {
                 <li className="flex gap-2"><span className="text-emerald-600">✓</span>Voice input (Web Speech API)</li>
                 <li className="flex gap-2"><span className="text-emerald-600">✓</span>In-chat quote/discount approval cards</li>
                 <li className="flex gap-2"><span className="text-emerald-600">✓</span>Sales-Ops agent templates marketplace</li>
-                <li className="flex gap-2"><span className="text-emerald-600">✓</span>Live integrations panel (Salesforce, Gong, Outreach)</li>
+                <li className="flex gap-2"><span className="text-emerald-600">✓</span>Integrations panel — connect/disconnect UI (Salesforce, Gong, Outreach)</li>
               </ul>
             </div>
           </aside>
@@ -248,7 +248,7 @@ export default function Home() {
                 Fractional AI Engineer, AI Product Manager, or AI Architect
               </p>
               <p className="text-sm text-slate-300 leading-relaxed">
-                I design and ship vertical AI products end-to-end — from product strategy and PRDs to working prototypes deployed to production. This Sales-Ops MVP went from idea to live in under a week.
+                I design and ship vertical AI products end-to-end — from product strategy and PRDs to working prototypes deployed to production. This Sales-Ops workspace is one such end-to-end build.
               </p>
               <div className="grid grid-cols-3 gap-2 pt-2">
                 <a

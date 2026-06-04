@@ -18,9 +18,9 @@
 
 Agentic Mobile is a functional MVP built to demonstrate expertise in **AI-native UX patterns**, **agentic system design**, and **rapid prototyping** for B2B mobile users.
 
-The core thesis: B2B decision-makers need to unblock workflows from their phone — but today's mobile AI tools just dump text. This prototype proves that **Generative UI** (rendering approval cards, charts, and live workflow progress directly in a conversational feed) is the right pattern for mobile-first B2B.
+The core thesis: B2B decision-makers need to unblock workflows from their phone — but today's mobile AI tools just dump text. This prototype makes the case for **Generative UI** (rendering approval cards, charts, and live workflow progress directly in a conversational feed) as the right pattern for mobile-first B2B.
 
-**Built in days, not months** — from zero to deployed MVP with OpenAI, Supabase, and Vercel.
+An end-to-end MVP built with Next.js, OpenAI, and Supabase, deployed on Netlify.
 
 ---
 
@@ -35,7 +35,7 @@ The core thesis: B2B decision-makers need to unblock workflows from their phone 
 | ⏳ **Workflows stall without approvals** | Hours of delay because the decision-maker isn't at their laptop |
 | 🔀 **Context-switching between apps** | Slack → CRM → Sheets → Email — productivity collapse |
 
-**The insight:** Mobile B2B users don't need *information*. They need **unblocked decisions in under 15 seconds.**
+**The insight:** Mobile B2B users don't need *information*. They need **decisions unblocked in a tap or two.**
 
 ---
 
@@ -58,20 +58,22 @@ Instead of text replies, the AI **renders the right interface** for each task:
 
 ---
 
-## 📊 Key Metrics & Outcomes
+## 📊 Metrics This Product Is Designed to Move
 
-| Metric | Target |
+This is a prototype, so the numbers below are the metrics the product is built to improve — not measured results.
+
+| Metric | Why it matters |
 |---|---|
-| ⚡ **Task Velocity** | Time-to-approval: hours → **< 15 min** |
-| 📲 **Agent Executions / Session** | **> 2 per mobile session** |
-| 🎯 **Zero-State Engagement** | **> 40%** of sessions act on proactive suggestions |
-| 🔁 **D7 / D30 Retention** | Track voice vs. text adoption curves |
+| ⚡ **Decision velocity** | Time-to-decision on off-policy quote approvals — hours down to minutes |
+| 📲 **Mobile engagement** | Agent runs per sales leader from their phone, between meetings |
+| 🎯 **Zero-state engagement** | Share of sessions that act on a proactive suggestion |
+| 🔁 **Retention (D7 / D30)** | Voice vs. text adoption over time |
 
-### Strategic bets validated:
+### Design bets (hypotheses to test):
 
-- **Bet 1:** B2B users prefer *generated UI components* over text on mobile → validated by agentic workflow card pattern
-- **Bet 2:** No-code agents can be managed from a phone → validated by full agent CRUD (create, configure, pause, delete)
-- **Bet 3:** Speed-to-insight > depth-of-insight on mobile → validated by concise card-based responses
+- **Bet 1:** B2B users prefer *generated UI components* over text on mobile — explored via the agentic workflow + approval-card pattern
+- **Bet 2:** No-code agents can be managed from a phone — explored via full agent CRUD (create, configure, pause, delete)
+- **Bet 3:** Speed-to-insight beats depth-of-insight on mobile — explored via concise, card-based responses
 
 ---
 
@@ -83,7 +85,7 @@ Instead of text replies, the AI **renders the right interface** for each task:
 | **Styling** | Tailwind CSS | Pixel-perfect mobile control, faster than component libs |
 | **AI** | OpenAI API (GPT-4o-mini) | Best cost/quality ratio; streaming-ready |
 | **Database** | Supabase (Postgres) | Instant setup, RLS, real-time — zero backend boilerplate |
-| **Deploy** | Vercel | Git-push deploys, edge network, zero DevOps |
+| **Deploy** | Netlify | Git-push deploys via `@netlify/plugin-nextjs`, zero DevOps |
 
 ### Trade-offs made deliberately:
 
@@ -93,18 +95,18 @@ Instead of text replies, the AI **renders the right interface** for each task:
 
 ---
 
-## � Case Study
+## 🧭 Case Study
 
 | | |
 |---|---|
 | **Problem** | B2B mobile workflows rarely get AI agent treatment — sales, field ops, and service teams work on mobile but AI tools are desktop-first |
 | **Approach** | Agent-driven mobile MVP for workflow approvals, real-time reporting, and multi-agent orchestration |
 | **Role** | Concept, prototype, user flow design, full-stack implementation |
-| **What this proves** | Speed of AI product prototyping — built from zero to deployed MVP in under a week |
+| **What this proves** | End-to-end ownership — product strategy, PRD, design, and full-stack implementation in one working prototype |
 
 ---
 
-## �🛠️ Local Development
+## 🛠️ Local Development
 
 ```bash
 git clone https://github.com/aurimas13/web_application.git
@@ -117,9 +119,11 @@ Create `.env.local`:
 
 ```env
 OPENAI_API_KEY=your-openai-api-key
-VITE_SUPABASE_URL=your-supabase-url
-VITE_SUPABASE_ANON_KEY=your-supabase-anon-key
+NEXT_PUBLIC_SUPABASE_URL=your-supabase-url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
 ```
+
+> Supabase is optional — without it, chat still streams; message logging is simply skipped.
 
 Open [http://localhost:3000](http://localhost:3000).
 

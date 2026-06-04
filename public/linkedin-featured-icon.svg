@@ -1,0 +1,177 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 627" width="1200" height="627" role="img" aria-label="Agentic Mobile — AI Agent Workspace · agentic.aurimas.io">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FAF7F0"/>
+      <stop offset="100%" stop-color="#EFEADF"/>
+    </linearGradient>
+    <linearGradient id="dark" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0F172A"/>
+      <stop offset="100%" stop-color="#1E293B"/>
+    </linearGradient>
+    <linearGradient id="teal" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#14B8A6"/>
+      <stop offset="100%" stop-color="#0D9488"/>
+    </linearGradient>
+    <linearGradient id="phone" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1E293B"/>
+      <stop offset="100%" stop-color="#0F172A"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#14B8A6" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#14B8A6" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="627" fill="url(#bg)"/>
+  <circle cx="930" cy="313" r="360" fill="url(#glow)"/>
+
+  <!-- Faint grid dots -->
+  <g fill="#D6D1C6" opacity="0.55">
+    <circle cx="80" cy="80" r="2"/>
+    <circle cx="140" cy="60" r="1.5"/>
+    <circle cx="60" cy="140" r="1.5"/>
+    <circle cx="1120" cy="540" r="2"/>
+    <circle cx="1060" cy="570" r="1.5"/>
+    <circle cx="1140" cy="490" r="1.5"/>
+  </g>
+
+  <!-- Eyebrow tag -->
+  <g transform="translate(80 88)">
+    <rect width="280" height="34" rx="17" fill="#FFFFFF" stroke="#E7E5E0"/>
+    <circle cx="20" cy="17" r="5" fill="url(#teal)"/>
+    <text x="36" y="22" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="700" fill="#0F172A" letter-spacing="1.8">B2B · MOBILE-FIRST · AI AGENTS</text>
+  </g>
+
+  <!-- Huge wordmark -->
+  <g transform="translate(80 200)">
+    <text font-family="Inter, system-ui, sans-serif" font-size="92" font-weight="900" fill="#0F172A" letter-spacing="-3.5">
+      <tspan x="0" y="0">Agentic</tspan>
+      <tspan x="0" y="92" fill="url(#teal)">Mobile.</tspan>
+    </text>
+    <text x="0" y="148" font-family="Inter, system-ui, sans-serif" font-size="22" font-weight="500" fill="#334155">
+      An AI agent workspace for decision-makers
+    </text>
+    <text x="0" y="178" font-family="Inter, system-ui, sans-serif" font-size="22" font-weight="500" fill="#334155">
+      who run the business from their phone.
+    </text>
+  </g>
+
+  <!-- Hire ribbon -->
+  <g transform="translate(80 470)">
+    <rect width="580" height="58" rx="14" fill="url(#dark)"/>
+    <circle cx="28" cy="29" r="5" fill="#F59E0B"/>
+    <text x="46" y="25" font-family="Inter, system-ui, sans-serif" font-size="10.5" font-weight="800" fill="#FCD34D" letter-spacing="2.4">AVAILABLE FOR HIRE</text>
+    <text x="46" y="45" font-family="Inter, system-ui, sans-serif" font-size="15" font-weight="700" fill="#FFFFFF">
+      Fractional AI Engineer · AI PM · AI Architect
+    </text>
+    <g transform="translate(420 18)">
+      <rect width="140" height="24" rx="12" fill="#0D9488"/>
+      <text x="70" y="16" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="800" fill="#FFFFFF">aurimas.io →</text>
+    </g>
+  </g>
+
+  <!-- URL footer -->
+  <g transform="translate(80 568)" font-family="Inter, system-ui, sans-serif">
+    <text font-size="13" font-weight="600" fill="#334155">
+      <tspan fill="#0F172A" font-weight="800">Aurimas A. Nausėdas</tspan>
+      <tspan dx="10" fill="#94A3B8">·</tspan>
+      <tspan dx="10" fill="#0D9488" font-weight="800">agentic.aurimas.io</tspan>
+      <tspan dx="10" fill="#94A3B8">·</tspan>
+      <tspan dx="10" fill="#64748B">Next.js · OpenAI · Supabase · Netlify</tspan>
+    </text>
+  </g>
+
+  <!-- Phone mockup -->
+  <g transform="translate(800 50)">
+    <!-- Soft shadow -->
+    <rect x="14" y="22" width="300" height="540" rx="44" fill="#0F172A" opacity="0.12"/>
+    <!-- Phone frame -->
+    <rect x="0" y="0" width="300" height="540" rx="44" fill="url(#phone)"/>
+    <rect x="6" y="6" width="288" height="528" rx="38" fill="#FAF7F0"/>
+    <!-- Dynamic island -->
+    <rect x="120" y="14" width="60" height="16" rx="8" fill="#0F172A"/>
+
+    <g clip-path="inset(0 round 38px)">
+      <!-- Top header -->
+      <g transform="translate(22 46)">
+        <rect width="38" height="38" rx="11" fill="url(#teal)"/>
+        <text x="19" y="25" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="20" font-weight="900" fill="#FFFFFF">A</text>
+        <text x="50" y="18" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="800" fill="#0F172A">Agentic Mobile</text>
+        <text x="50" y="32" font-family="Inter, system-ui, sans-serif" font-size="9" fill="#64748B">Pipeline standup · live</text>
+        <circle cx="240" cy="19" r="5" fill="#10B981"/>
+      </g>
+
+      <!-- Streaming chat bubble (assistant) -->
+      <g transform="translate(22 104)">
+        <rect width="220" height="74" rx="14" fill="#FFFFFF" stroke="#E7E5E0"/>
+        <text x="14" y="22" font-family="Inter, system-ui, sans-serif" font-size="9" font-weight="700" fill="#0D9488" letter-spacing="1.2">AGENT</text>
+        <text x="14" y="40" font-family="Inter, system-ui, sans-serif" font-size="10.5" fill="#0F172A">3 deals stalled this week.</text>
+        <text x="14" y="55" font-family="Inter, system-ui, sans-serif" font-size="10.5" fill="#0F172A">Acme is highest risk —</text>
+        <text x="14" y="68" font-family="Inter, system-ui, sans-serif" font-size="10.5" fill="#0F172A">no reply in 14 days.</text>
+        <!-- Streaming caret -->
+        <rect x="159" y="59" width="2" height="11" fill="#0D9488"/>
+      </g>
+
+      <!-- User bubble -->
+      <g transform="translate(98 188)">
+        <rect width="180" height="34" rx="14" fill="#0F172A"/>
+        <text x="14" y="22" font-family="Inter, system-ui, sans-serif" font-size="10.5" fill="#FFFFFF">Draft a nudge for Acme.</text>
+      </g>
+
+      <!-- Approval card (the wow moment) -->
+      <g transform="translate(22 234)">
+        <rect width="256" height="138" rx="14" fill="#FFFFFF" stroke="#FCD34D" stroke-width="1.5"/>
+        <text x="14" y="22" font-family="Inter, system-ui, sans-serif" font-size="8.5" font-weight="800" fill="#64748B" letter-spacing="1.2">APPROVAL REQUEST</text>
+        <g transform="translate(196 11)">
+          <rect width="46" height="14" rx="4" fill="#FEF3C7"/>
+          <text x="23" y="10.5" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="8" font-weight="800" fill="#92400E">HIGH</text>
+        </g>
+        <text x="14" y="44" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="800" fill="#0F172A">Approve Q3 marketing</text>
+        <text x="14" y="62" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="800" fill="#0F172A">budget — $284,000</text>
+        <text x="14" y="82" font-family="Inter, system-ui, sans-serif" font-size="10" fill="#475569">12% over Q2 · CFO pre-reviewed</text>
+        <g transform="translate(14 96)">
+          <rect width="114" height="30" rx="8" fill="#F1F5F9"/>
+          <text x="57" y="19.5" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="800" fill="#475569">Reject</text>
+        </g>
+        <g transform="translate(132 96)">
+          <rect width="110" height="30" rx="8" fill="#059669"/>
+          <text x="55" y="19.5" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="800" fill="#FFFFFF">Approve</text>
+        </g>
+      </g>
+
+      <!-- Composer -->
+      <g transform="translate(22 388)">
+        <rect width="256" height="40" rx="20" fill="#FFFFFF" stroke="#E7E5E0"/>
+        <text x="18" y="25" font-family="Inter, system-ui, sans-serif" font-size="10.5" fill="#94A3B8">Ask your agents…</text>
+        <circle cx="234" cy="20" r="14" fill="url(#teal)"/>
+        <path d="M-6 -2 L-6 2 L-3 2 L-3 5 L0 5 L0 -5 L-3 -5 L-3 -2 Z" transform="translate(234 20)" fill="#FFFFFF"/>
+      </g>
+
+      <!-- Bottom nav -->
+      <g transform="translate(0 458)">
+        <rect width="300" height="70" fill="#FAF7F0" stroke="#E7E5E0"/>
+        <g transform="translate(45 14)">
+          <circle cx="0" cy="6" r="9" fill="none" stroke="#0D9488" stroke-width="2"/>
+          <text x="0" y="34" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="9.5" font-weight="800" fill="#0D9488">Chat</text>
+        </g>
+        <g transform="translate(115 14)">
+          <rect x="-9" y="-2" width="18" height="14" rx="3" fill="none" stroke="#94A3B8" stroke-width="2"/>
+          <text x="0" y="34" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="9.5" fill="#94A3B8">Inbox</text>
+          <circle cx="9" cy="-2" r="7" fill="#F59E0B"/>
+          <text x="9" y="1" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="8" font-weight="900" fill="#FFFFFF">3</text>
+        </g>
+        <g transform="translate(185 14)">
+          <circle cx="-5" cy="6" r="3" fill="#94A3B8"/>
+          <circle cx="5" cy="6" r="3" fill="#94A3B8"/>
+          <text x="0" y="34" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="9.5" fill="#94A3B8">Agents</text>
+        </g>
+        <g transform="translate(255 14)">
+          <circle cx="0" cy="6" r="6" fill="none" stroke="#94A3B8" stroke-width="2"/>
+          <circle cx="0" cy="6" r="2" fill="#94A3B8"/>
+          <text x="0" y="34" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="9.5" fill="#94A3B8">Vision</text>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

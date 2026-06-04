@@ -176,6 +176,6 @@
       <tspan dx="10" fill="#94A3B8">·</tspan>
       <tspan dx="10" fill="#0D9488" font-weight="700">agentic.aurimas.io</tspan>
     </text>
-    <text y="22" font-size="11" fill="#64748B">Next.js · TypeScript · Tailwind · OpenAI · Supabase · Vercel</text>
+    <text y="22" font-size="11" fill="#64748B">Next.js · TypeScript · Tailwind · OpenAI · Supabase · Netlify</text>
   </g>
 </svg>

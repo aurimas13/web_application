@@ -10,20 +10,20 @@ const TECH_STACK = [
   { name: 'Tailwind CSS', color: 'text-cyan-700' },
   { name: 'OpenAI API', color: 'text-emerald-600' },
   { name: 'Supabase', color: 'text-green-700' },
-  { name: 'Vercel', color: 'text-slate-700' },
+  { name: 'Netlify', color: 'text-slate-700' },
 ];
 
 const METRICS = [
-  { value: '< 15 min', label: 'Time-to-approval (from hours)', icon: Zap },
-  { value: '2+ / session', label: 'Agent runs per mobile session', icon: Bot },
-  { value: '40%+', label: 'Zero-state engagement', icon: BarChart3 },
+  { value: '5', label: 'Native sales agents', icon: Bot },
+  { value: '9', label: 'Agent templates', icon: BarChart3 },
+  { value: 'Voice', label: 'Speech-to-text input', icon: Zap },
 ];
 
 const FEATURES = [
-  { icon: MessageSquare, title: 'Streaming Sales Chat', desc: 'GPT-4o-mini wired to your CRM, call data, and inbox — with voice input' },
+  { icon: MessageSquare, title: 'Streaming Sales Chat', desc: 'GPT-4o-mini wired to a sales-tuned prompt, with voice input' },
   { icon: Bot, title: 'Sales Agents', desc: 'Pipeline Standup, Deal Risk, Quote Approver, Forecast Builder, Outbound Sequencer' },
-  { icon: Zap, title: 'Live Approvals', desc: 'In-chat quote/discount approval cards — decide from your phone in &lt;30s' },
-  { icon: Eye, title: 'Sales-Ops PRD', desc: 'Full product brief with metrics, principles, and tech architecture' },
+  { icon: Zap, title: 'In-Chat Approvals', desc: 'Quote/discount approval cards — decide from your phone in one tap' },
+  { icon: Eye, title: 'Sales-Ops PRD', desc: 'Full product brief with goals, principles, and tech architecture' },
 ];
 
 export default function HeroOverlay({ onEnter }: { onEnter: () => void }) {
@@ -91,7 +91,7 @@ export default function HeroOverlay({ onEnter }: { onEnter: () => void }) {
         {/* Key metrics */}
         <div>
           <p className="text-[10px] uppercase tracking-[0.15em] text-slate-500 font-semibold mb-2.5">
-            Target Outcomes
+            At a Glance
           </p>
           <div className="grid grid-cols-3 gap-2">
             {METRICS.map((m) => {
@@ -170,7 +170,7 @@ export default function HeroOverlay({ onEnter }: { onEnter: () => void }) {
               },
               {
                 label: 'Role',
-                text: 'Product strategy, PRD, prototype, full-stack implementation — from zero to live in under a week.',
+                text: 'Product strategy, PRD, prototype, and full-stack implementation — end-to-end.',
               },
               {
                 label: 'What this proves',

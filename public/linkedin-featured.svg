@@ -84,18 +84,18 @@
     <g transform="translate(0 200)">
       <g>
         <rect width="170" height="74" rx="12" fill="#FFFFFF" stroke="#E7E5E0"/>
-        <text x="16" y="26" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="700" fill="#0D9488" letter-spacing="1.5">TIME-TO-APPROVAL</text>
-        <text x="16" y="55" font-family="Inter, system-ui, sans-serif" font-size="22" font-weight="800" fill="#0F172A">&lt; 15 min</text>
+        <text x="16" y="26" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="700" fill="#0D9488" letter-spacing="1.5">NATIVE AGENTS</text>
+        <text x="16" y="55" font-family="Inter, system-ui, sans-serif" font-size="22" font-weight="800" fill="#0F172A">5</text>
       </g>
       <g transform="translate(190 0)">
         <rect width="170" height="74" rx="12" fill="#FFFFFF" stroke="#E7E5E0"/>
         <text x="16" y="26" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="700" fill="#0D9488" letter-spacing="1.5">AGENT TEMPLATES</text>
-        <text x="16" y="55" font-family="Inter, system-ui, sans-serif" font-size="22" font-weight="800" fill="#0F172A">9 ready</text>
+        <text x="16" y="55" font-family="Inter, system-ui, sans-serif" font-size="22" font-weight="800" fill="#0F172A">9</text>
       </g>
       <g transform="translate(380 0)">
         <rect width="170" height="74" rx="12" fill="#FFFFFF" stroke="#E7E5E0"/>
         <text x="16" y="26" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="700" fill="#0D9488" letter-spacing="1.5">INTEGRATIONS</text>
-        <text x="16" y="55" font-family="Inter, system-ui, sans-serif" font-size="22" font-weight="800" fill="#0F172A">7 wired</text>
+        <text x="16" y="55" font-family="Inter, system-ui, sans-serif" font-size="22" font-weight="800" fill="#0F172A">9</text>
       </g>
     </g>
 
